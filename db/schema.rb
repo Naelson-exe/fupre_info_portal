@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_06_08_164515) do
+ActiveRecord::Schema[7.2].define(version: 2025_06_08_213657) do
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
     t.string "record_type", null: false
@@ -50,9 +50,46 @@ ActiveRecord::Schema[7.2].define(version: 2025_06_08_164515) do
     t.string "unlock_token"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["created_at"], name: "index_admin_users_on_created_at"
     t.index ["email"], name: "index_admin_users_on_email", unique: true
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "details"
+    t.integer "admin_user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "event_date", null: false
+    t.time "event_time"
+    t.index ["admin_user_id", "created_at"], name: "index_events_on_admin_and_created_at"
+    t.index ["admin_user_id"], name: "index_events_on_admin_user_id"
+    t.index ["created_at"], name: "index_events_on_created_at"
+    t.index ["event_date", "event_time"], name: "index_events_on_date_and_time"
+    t.index ["event_date"], name: "index_events_on_event_date"
+    t.index ["title"], name: "index_events_on_title"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title", null: false
+    t.text "summary"
+    t.text "content", null: false
+    t.string "status", default: "draft", null: false
+    t.integer "admin_user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "main_image"
+    t.string "thumbnail"
+    t.datetime "published_at"
+    t.index ["admin_user_id", "created_at"], name: "index_posts_on_admin_and_created_at"
+    t.index ["admin_user_id"], name: "index_posts_on_admin_user_id"
+    t.index ["created_at"], name: "index_posts_on_created_at"
+    t.index ["status"], name: "index_posts_on_status"
+    t.index ["title"], name: "index_posts_on_title"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "events", "admin_users"
+  add_foreign_key "posts", "admin_users"
 end
