@@ -2,7 +2,7 @@ namespace :db do
   desc "Check database state"
   task check: :environment do
     puts "Checking admin_users table..."
-    
+
     # Check all admin users
     puts "\nAll admin users:"
     AdminUser.all.each do |user|

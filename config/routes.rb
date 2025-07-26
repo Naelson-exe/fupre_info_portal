@@ -1,23 +1,35 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
   root "home#index"
 
+  get "/manifest.json", to: "pwa#manifest", defaults: { format: :json }
+
+  # Public routes with custom paths
+  resources :posts, only: [ :index, :show ], path: "memos"
+  resources :events, only: [ :index, :show ], path: "calendar"
+  get "about", to: "pages#about"
+  get "search", to: "search#index"
+
+  # Admin namespace
   namespace :admin do
     get "login", to: "sessions#new", as: :login
     post "login", to: "sessions#create", as: :authenticate
     delete "logout", to: "sessions#destroy", as: :logout
     root "dashboard#index"
-    resources :dashboard, only: [:index], path: ''
+
+    resources :posts do
+      collection do
+        get :search
+      end
+    end
+
+    resources :events do
+      collection do
+        get :search
+      end
+    end
   end
 
-  # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
-  # Can be used by load balancers and uptime monitors to verify that the app is live.
   if Rails.env.development? || Rails.env.test?
-    get 'up' => 'rails/health#show', as: :rails_health_check
+    get "up" => "rails/health#show", as: :rails_health_check
   end
-
-  # Render dynamic PWA files from app/views/pwa/*
-  get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
-  get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 end

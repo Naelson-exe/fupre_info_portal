@@ -1,4 +1,4 @@
-require 'bcrypt'
+require "bcrypt"
 
 class AdminUser < ApplicationRecord
   has_secure_password

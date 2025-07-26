@@ -1,0 +1,27 @@
+class PostsController < ApplicationController
+  before_action :set_post, only: [ :show ]
+
+  def index
+    @posts = Post.published.includes(:admin_user)
+
+    if params[:search].present?
+      search_term = "%#{params[:search]}%"
+      @posts = @posts.where("title LIKE ? OR content LIKE ? OR summary LIKE ?",
+                           search_term, search_term, search_term)
+    end
+
+    @pagy, @posts = pagy(@posts.order(published_at: :desc, created_at: :desc), items: params[:per] || 10)
+  end
+
+  def show
+    # Post is set by before_action
+  end
+
+  private
+
+  def set_post
+    @post = Post.published.find(params[:id])
+  rescue ActiveRecord::RecordNotFound
+    redirect_to posts_path, alert: "Memo not found"
+  end
+end

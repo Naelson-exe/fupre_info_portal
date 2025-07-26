@@ -3,11 +3,14 @@ module AdminAuthenticatable
 
   included do
     helper_method :current_admin_user, :admin_user_signed_in?
-    before_action :authenticate_admin_user!, except: [:new, :create]
+    before_action :authenticate_admin_user!
   end
 
   def authenticate_admin_user!
-    redirect_to admin_login_path, alert: "Please log in" unless admin_user_signed_in?
+    return if admin_user_signed_in?
+
+    flash.now[:alert] = "You must be logged in to access this page."
+    redirect_to admin_login_path, alert: "You need to sign in or sign up before continuing."
   end
 
   def current_admin_user

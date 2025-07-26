@@ -1,40 +1,48 @@
-<div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-6">
-      <div class="card">
-        <div class="card-header">
-          <h3 class="text-center">Admin Login</h3>
-        </div>
-        <div class="card-body">
-          <% if flash[:alert] %>
-            <div class="alert alert-danger alert-dismissible fade show">
-              <%= flash[:alert] %>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-          <% elsif flash[:notice] %>
-            <div class="alert alert-success alert-dismissible fade show">
-              <%= flash[:notice] %>
-              <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-            </div>
-          <% end %>
-
-          <%= form_with url: "/admin/login", method: :post do |f| %>
-            <div class="mb-3">
-              <%= f.label :email %>
-              <%= f.email_field :email, class: "form-control" %>
-            </div>
-
-            <div class="mb-3">
-              <%= f.label :password %>
-              <%= f.password_field :password, class: "form-control" %>
-            </div>
-
-            <div class="d-grid">
-              <%= f.submit "Login", class: "btn btn-primary" %>
-            </div>
-          <% end %>
-        </div>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin Login - FUPRE Portal</title>
+  <%= csrf_meta_tags %>
+  <%= stylesheet_link_tag "application" %>
+</head>
+<body class="bg-light">
+  <div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card" style="width: 400px;">
+      <div class="card-body">
+        <h3 class="card-title text-center mb-4">Admin Login</h3>
+        
+        <% if flash[:notice] %>
+          <div class="alert alert-success"><%= flash[:notice] %></div>
+        <% end %>
+        <% if flash[:alert] %>
+          <div class="alert alert-danger"><%= flash[:alert] %></div>
+        <% end %>
+        
+        <%= form_with url: admin_authenticate_path, local: true do |form| %>
+          <div class="mb-3">
+            <%= form.label :email, class: "form-label" %>
+            <%= form.email_field :email, class: "form-control", required: true %>
+          </div>
+          
+          <div class="mb-3">
+            <%= form.label :password, class: "form-label" %>
+            <%= form.password_field :password, class: "form-control", required: true %>
+          </div>
+          
+          <%= form.submit "Login", class: "btn btn-primary w-100" %>
+        <% end %>
       </div>
     </div>
   </div>
-</div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      setTimeout(function() {
+        let flashMessages = document.querySelectorAll(".alert");
+        flashMessages.forEach(function(message) {
+          message.style.display = "none";
+        });
+      }, 20000);
+    });
+  </script>
+</body>
+</html>

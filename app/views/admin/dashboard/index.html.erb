@@ -1,47 +1,77 @@
+<%# app/views/admin/dashboard/index.html.erb %>
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-12">
-      <% if flash[:notice] %>
-        <div class="alert alert-success alert-dismissible fade show" role="alert">
-          <%= flash[:notice] %>
-          <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
-      <% end %>
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1>Welcome, <%= current_admin_user.name %></h1>
+  </div>
 
-      <div class="d-flex justify-content-between align-items-center mb-4">
-        <h1>Admin Dashboard</h1>
-        <%= button_to "Logout", admin_logout_path, method: :delete, class: "btn btn-outline-danger", form: { data: { turbo: false } } %>
+  <%# Quick Stats %>
+  <div class="row g-4 mb-4">
+    <div class="col-md-4">
+      <div class="card text-center h-100">
+        <div class="card-body">
+          <h5 class="card-title"><i class="bi bi-file-earmark-text me-2"></i>Published Memos</h5>
+          <p class="card-text fs-4"><%= @total_published_posts %></p>
+          <%= link_to "Manage Memos", admin_posts_path, class: "btn btn-outline-primary" %>
+        </div>
       </div>
-
-      <div class="row">
-        <div class="col-md-3 mb-4">
-          <div class="card">
-            <div class="card-body">
-              <h5 class="card-title">Welcome, <%= current_admin_user.name %></h5>
-              <p class="card-text">Role: <%= current_admin_user.role %></p>
-            </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center h-100">
+        <div class="card-body">
+          <h5 class="card-title"><i class="bi bi-calendar-event me-2"></i>Upcoming Events</h5>
+          <p class="card-text fs-4"><%= @total_upcoming_events %></p>
+          <%= link_to "Manage Events", admin_events_path, class: "btn btn-outline-primary" %>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card text-center h-100">
+        <div class="card-body">
+          <h5 class="card-title"><i class="bi bi-plus-circle me-2"></i>Quick Actions</h5>
+          <div class="d-grid gap-2">
+            <%= link_to "Create New Memo", new_admin_post_path, class: "btn btn-primary" %>
+            <%= link_to "Create New Event", new_admin_event_path, class: "btn btn-success" %>
           </div>
         </div>
+      </div>
+    </div>
+  </div>
 
-        <div class="col-md-9">
-          <div class="card">
-            <div class="card-header">
-              <h5 class="mb-0">Recent Activities</h5>
-            </div>
-            <div class="card-body">
-              <% if @recent_activities.any? %>
-                <ul class="list-group list-group-flush">
-                  <% @recent_activities.each do |activity| %>
-                    <li class="list-group-item">
-                      <%= activity %>
-                    </li>
-                  <% end %>
-                </ul>
-              <% else %>
-                <p class="text-muted">No recent activities to display.</p>
-              <% end %>
-            </div>
-          </div>
+  <%# Recent Activity %>
+  <div class="row g-4">
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Recent Memos</h5>
+        </div>
+        <div class="list-group list-group-flush">
+          <% @recent_posts.each do |post| %>
+            <%= link_to admin_post_path(post), class: "list-group-item list-group-item-action" do %>
+              <div class="d-flex w-100 justify-content-between">
+                <h6 class="mb-1"><%= post.title %></h6>
+                <small class="text-muted"><%= time_ago_in_words(post.created_at) %> ago</small>
+              </div>
+              <p class="mb-1 text-muted"><%= truncate(post.summary, length: 80) %></p>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <div class="col-lg-6">
+      <div class="card">
+        <div class="card-header">
+          <h5 class="mb-0">Upcoming Events</h5>
+        </div>
+        <div class="list-group list-group-flush">
+          <% @recent_events.each do |event| %>
+            <%= link_to admin_event_path(event), class: "list-group-item list-group-item-action" do %>
+              <div class="d-flex w-100 justify-content-between">
+                <h6 class="mb-1"><%= event.title %></h6>
+                <small class="text-muted"><%= event.event_date.to_formatted_s(:short) %></small>
+              </div>
+              <p class="mb-1 text-muted"><%= truncate(event.details, length: 80) %></p>
+            <% end %>
+          <% end %>
         </div>
       </div>
     </div>

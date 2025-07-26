@@ -32,7 +32,7 @@ describe "Admin Authentication", type: :feature do
       # Debugging output
       puts "Current path: #{page.current_path}"
       puts "Response body: #{page.body}"
-      
+
       expect(page).to have_current_path(admin_root_path)
       expect(page).to have_content("Welcome, Admin User")
     end
@@ -65,7 +65,7 @@ describe "Admin Authentication", type: :feature do
     it "redirects to login page when not authenticated" do
       visit admin_root_path
       expect(page).to have_current_path(admin_login_path)
-      expect(page).to have_content("Please log in")
+      expect(page).to have_content("You need to sign in or sign up before continuing.")
     end
   end
 end

@@ -3,21 +3,81 @@
   <head>
     <title><%= content_for(:title) || "Fupre Info Portal" %></title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="description" content="<%= content_for?(:meta_description) ? yield(:meta_description) : 'FUPRE Info Portal provides the latest news, events, and announcements from the Federal University of Petroleum Resources, Effurun.' %>">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
     <%= yield :head %>
 
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
+    <link rel="icon" type="image/png" href="/icon.png">
+    <link rel="shortcut icon" href="/favicon.ico">
     <link rel="apple-touch-icon" href="/icon.png">
+    <link rel="manifest" href="/manifest.json">
+
+    <%# Bootstrap 5 CDN %>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    
+    <%# Font Awesome CDN %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <%= yield %>
+  <body class="bg-light">
+    <header>
+      <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom">
+        <div class="container-fluid">
+          <%= link_to root_path, class: "navbar-brand d-flex align-items-center" do %>
+            <%= image_tag "logo.png", alt: "FUPRE Logo", style: "height: 40px; margin-right: 10px;" %>
+            <span class="fw-bold fs-5">FUPRE Portal</span>
+          <% end %>
+
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="mainNavbar">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <%= link_to "Home", root_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Memos", posts_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Calendar", events_path, class: "nav-link" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "About", about_path, class: "nav-link" %>
+              </li>
+            </ul>
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <%= link_to admin_root_path, class: "btn btn-outline-primary" do %>
+                  <i class="fas fa-lock"></i>
+                <% end %>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container my-4">
+      <%= render 'layouts/flash_messages' %>
+      <%= yield %>
+    </main>
+
+    <footer class="bg-white border-top text-center text-muted py-3">
+      <div class="container">
+        &copy; <%= Time.now.year %> Federal University of Petroleum Resources, Effurun.
+      </div>
+    </footer>
+
+    <%# Bootstrap 5 JS Bundle %>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
   </body>
 </html>

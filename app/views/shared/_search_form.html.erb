@@ -1,0 +1,18 @@
+<%= form_with(url: url, method: :get, class: "mb-4", data: { controller: "search" }) do |form| %>
+  <div class="input-group mb-3">
+    <%= form.hidden_field :search_scope, value: search_scope %>
+    <%= form.search_field :query, value: query, class: "form-control", placeholder: "Search #{search_scope.to_s.pluralize.humanize.downcase}..." %>
+    <button class="btn btn-primary" type="submit">Search</button>
+  </div>
+
+  <% if search_scope == :event %>
+    <div class="row g-2">
+      <div class="col-md">
+        <%= form.date_field :start_date, value: params[:start_date], class: "form-control", placeholder: "Start Date" %>
+      </div>
+      <div class="col-md">
+        <%= form.date_field :end_date, value: params[:end_date], class: "form-control", placeholder: "End Date" %>
+      </div>
+    </div>
+  <% end %>
+<% end %>

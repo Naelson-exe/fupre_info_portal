@@ -44,7 +44,7 @@ group :development, :test do
   # Omakase Ruby styling [https://github.com/rails/rubocop-rails-omakase/]
   gem "rubocop-rails-omakase", require: false
 
-  gem "byebug", platforms: [:mri, :mingw, :x64_mingw]
+  gem "byebug", platforms: [ :mri, :mingw, :x64_mingw ]
   gem "rspec-rails", "~> 6.0"
   gem "factory_bot_rails"
   gem "faker"
@@ -62,3 +62,7 @@ group :test do
   gem "database_cleaner-active_record"
   gem "warden"
 end
+
+gem "bootstrap", "~> 5.3"
+gem "sassc-rails"
+gem "pagy"

@@ -1,0 +1,28 @@
+<div class="container my-4">
+  <h1 class="mb-4">Search Results</h1>
+
+  <%= render 'shared/search_form', query: @query %>
+
+  <% if @query.blank? %>
+    <p class="text-muted">Please enter a search term to begin.</p>
+  <% elsif @results.empty? %>
+    <p class="text-muted">No results found for "<%= @query %>".</p>
+  <% else %>
+    <div class="list-group">
+      <% @results.each do |result| %>
+        <%= link_to search_result_path(result), class: "list-group-item list-group-item-action" do %>
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1"><%= result.title %></h5>
+            <small><%= result.is_a?(Post) ? "Memo" : "Event" %></small>
+          </div>
+          <p class="mb-1"><%= result.is_a?(Post) ? result.excerpt : result.details.truncate(100) %></p>
+          <small>Posted on <%= result.formatted_date %></small>
+        <% end %>
+      <% end %>
+    </div>
+
+    <div class="mt-4">
+      <%= paginate @results %>
+    </div>
+  <% end %>
+</div>

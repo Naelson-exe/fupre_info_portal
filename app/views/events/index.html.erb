@@ -1,0 +1,75 @@
+<% content_for :title, "Academic Calendar & Events" %>
+
+<div class="d-flex justify-content-between align-items-center mb-4">
+  <h1 class="h2">Academic Calendar & Events</h1>
+  <%= render 'shared/search_form', query: params[:query], search_scope: :event, url: search_path %>
+</div>
+
+<div class="d-flex justify-content-end mb-3">
+  <span>Show:</span>
+  <div class="dropdown ms-2">
+    <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="perPageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+      <%= params[:per] || 10 %> per page
+    </button>
+    <ul class="dropdown-menu" aria-labelledby="perPageDropdown">
+      <li><%= link_to "10", url_for(params.permit(:search).merge(per: 10)), class: "dropdown-item" %></li>
+      <li><%= link_to "25", url_for(params.permit(:search).merge(per: 25)), class: "dropdown-item" %></li>
+      <li><%= link_to "50", url_for(params.permit(:search).merge(per: 50)), class: "dropdown-item" %></li>
+    </ul>
+  </div>
+</div>
+
+<%# Upcoming Events %>
+<h2 class="h4 mb-3">Upcoming Events</h2>
+<div class="card shadow-sm mb-5">
+  <div class="card-body">
+    <ul class="list-group list-group-flush">
+      <% if @upcoming_events.any? %>
+        <% @upcoming_events.each do |event| %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <h5 class="mb-1"><%= link_to event.title, event_path(event), class: "text-decoration-none" %></h5>
+              <p class="mb-1 text-muted">Date: <%= event.event_date.to_fs(:long) %><% if event.event_time.present? %> at <%= event.event_time.strftime("%I:%M %p") %><% end %></p>
+              <p class="mb-0"><%= truncate(event.details, length: 100) %></p>
+            </div>
+            <%= link_to "View Details", event_path(event), class: "btn btn-sm btn-outline-primary" %>
+          </li>
+        <% end %>
+      <% else %>
+        <li class="list-group-item">
+          <p class="text-center my-4">No upcoming events found.</p>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="card-footer d-flex justify-content-center">
+    <%== pagy_bootstrap_nav(@pagy_upcoming) %>
+  </div>
+</div>
+
+<%# Past Events %>
+<h2 class="h4 mb-3">Past Events</h2>
+<div class="card shadow-sm">
+  <div class="card-body">
+    <ul class="list-group list-group-flush">
+      <% if @past_events.any? %>
+        <% @past_events.each do |event| %>
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <div>
+              <h5 class="mb-1"><%= link_to event.title, event_path(event), class: "text-decoration-none" %></h5>
+              <p class="mb-1 text-muted">Date: <%= event.event_date.to_fs(:long) %></p>
+            </div>
+            <span class="badge bg-light text-dark">Concluded</span>
+          </li>
+        <% end %>
+      <% else %>
+        <li class="list-group-item">
+          <p class="text-center my-4">No past events found.</p>
+        </li>
+      <% end %>
+    </ul>
+  </div>
+  <div class="card-footer d-flex justify-content-center">
+    <%== pagy_bootstrap_nav(@pagy_past) %>
+  </div>
+</div>

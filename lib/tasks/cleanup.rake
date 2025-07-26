@@ -2,7 +2,7 @@ namespace :admin do
   desc "Clean up admin users and create single admin user"
   task cleanup: :environment do
     puts "Cleaning up admin users..."
-    
+
     # Delete all existing admin users
     AdminUser.delete_all
     puts "All existing admin users deleted"

@@ -1,0 +1,33 @@
+<% content_for :title, @event.title %>
+<% content_for :meta_description, truncate(@event.details.to_plain_text, length: 160) %>
+
+<%# Breadcrumb Navigation %>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to "Home", root_path %></li>
+    <li class="breadcrumb-item"><%= link_to "Events", events_path %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= @event.title %></li>
+  </ol>
+</nav>
+
+<div class="card shadow-sm">
+  <div class="card-body">
+    <%# Event Header %>
+    <h1 class="card-title h2"><%= @event.title %></h1>
+    <p class="card-subtitle mb-3 text-muted">
+      Date: <%= @event.event_date.to_fs(:long) %> at <%= @event.event_time.strftime("%I:%M %p") %>
+    </p>
+    
+    <hr>
+
+    <%# Event Content %>
+    <div class="card-text mt-4">
+      <%= @event.details %>
+    </div>
+  </div>
+</div>
+
+<%# Back to Events Link %>
+<div class="mt-4">
+  <%= link_to "← Back to All Events", events_path, class: "btn btn-outline-primary" %>
+</div>

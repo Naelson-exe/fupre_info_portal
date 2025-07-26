@@ -1,0 +1,123 @@
+@import "bootstrap";
+
+// Design System Variables
+
+// Color Palette
+$deep-blue: #003366;
+$gold-accent: #C49A6C;
+$soft-gray: #F5F5F5;
+$charcoal: #333333;
+$white: #FFFFFF;
+
+// Typography
+$font-family-headings: 'Montserrat', sans-serif;
+$font-family-body: 'Roboto', sans-serif;
+
+// Base Styles
+body {
+  background-color: $soft-gray;
+  color: $charcoal;
+  font-family: $font-family-body;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: $font-family-headings;
+  color: $deep-blue;
+}
+
+// Typography Scale
+h1 {
+  font-size: 2.25rem;
+  line-height: 2.75rem;
+  font-weight: 700;
+}
+
+h2 {
+  font-size: 1.75rem;
+  line-height: 2.25rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.5rem;
+  line-height: 2rem;
+  font-weight: 600;
+}
+
+body {
+  font-size: 1rem;
+  line-height: 1.5rem;
+  font-weight: 400;
+}
+
+.caption {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 400;
+}
+
+
+// Import Google Fonts
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400&display=swap');
+
+// Component Styles
+
+// Buttons
+.btn {
+  min-height: 2.75rem;
+  min-width: 2.75rem;
+  border-radius: 0.375rem;
+  padding: 0.75rem 1.5rem;
+}
+
+.btn-primary {
+  background-color: $deep-blue;
+  color: $white;
+  border: none;
+
+  &:hover {
+    background-color: darken($deep-blue, 10%);
+  }
+}
+
+.btn-secondary {
+  background-color: $gold-accent;
+  color: $charcoal;
+  border: none;
+
+  &:hover {
+    background-color: darken($gold-accent, 10%);
+  }
+}
+
+.btn:disabled {
+  background-color: $soft-gray;
+  color: $charcoal;
+  opacity: 0.5;
+}
+
+// Cards
+.card {
+  background-color: $white;
+  border: 1px solid $soft-gray;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+// Forms
+.form-control {
+  background-color: $white;
+  border: 1px solid $soft-gray;
+  border-radius: 0.375rem;
+  padding: 0.75rem 1rem;
+
+  &:focus {
+    border-color: $deep-blue;
+    box-shadow: 0 0 0 0.2rem rgba($deep-blue, 0.25);
+  }
+}
+
+.form-label {
+  font-weight: 600;
+}

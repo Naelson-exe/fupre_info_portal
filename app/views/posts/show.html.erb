@@ -1,0 +1,31 @@
+<% content_for :title, @post.title %>
+<% content_for :meta_description, @post.summary %>
+
+<%# Breadcrumb Navigation %>
+<nav aria-label="breadcrumb">
+  <ol class="breadcrumb">
+    <li class="breadcrumb-item"><%= link_to "Home", root_path %></li>
+    <li class="breadcrumb-item"><%= link_to "Memos", posts_path %></li>
+    <li class="breadcrumb-item active" aria-current="page"><%= @post.title %></li>
+  </ol>
+</nav>
+
+<div class="card shadow-sm">
+  <div class="card-body">
+    <%# Memo Header %>
+    <h1 class="card-title h2"><%= @post.title %></h1>
+    <p class="card-subtitle mb-3 text-muted">Published on: <%= @post.published_at&.to_fs(:long) %></p>
+    
+    <hr>
+
+    <%# Memo Content %>
+    <div class="card-text mt-4">
+      <%= @post.content %>
+    </div>
+  </div>
+</div>
+
+<%# Back to Memos Link %>
+<div class="mt-4">
+  <%= link_to "← Back to All Memos", posts_path, class: "btn btn-outline-primary" %>
+</div>
