@@ -1,10 +1,10 @@
 <%# app/views/admin/events/_form.html.erb %>
-<%= form_with(model: [:admin, @event], local: true, class: "needs-validation", novalidate: true, data: { controller: "autosave" }) do |form| %>
+<%= form_with(model: [:admin, @event], local: true, class: "needs-validation", novalidate: true, data: { controller: "autosave form-submission validation", validation_target: "form" }) do |form| %>
   <%= render 'shared/error_messages', object: @event %>
 
   <div class="mb-3">
     <%= form.label :title, class: "form-label" %>
-    <%= form.text_field :title, class: "form-control", required: true %>
+    <%= form.text_field :title, class: "form-control", required: true, data: { controller: "focus" } %>
     <div class="invalid-feedback">
       Please provide a title.
     </div>
@@ -39,6 +39,6 @@
 
   <div class="d-flex justify-content-end">
     <%= link_to "Cancel", admin_events_path, class: "btn btn-secondary me-2" %>
-    <%= form.submit "Save Event", class: "btn btn-primary" %>
+    <%= form.submit "Save Event", class: "btn btn-primary", data: { form_submission_target: "submit" } %>
   </div>
 <% end %>

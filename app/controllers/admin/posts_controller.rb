@@ -85,7 +85,7 @@ class Admin::PostsController < Admin::ApplicationController
   private
 
   def set_post
-    @post = Post.find(params[:id])
+    @post = Post.includes(:admin_user).find(params[:id])
   rescue ActiveRecord::RecordNotFound
     redirect_to admin_posts_path, alert: "Post not found."
   end

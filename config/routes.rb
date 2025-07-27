@@ -15,6 +15,7 @@ Rails.application.routes.draw do
     post "login", to: "sessions#create", as: :authenticate
     delete "logout", to: "sessions#destroy", as: :logout
     root "dashboard#index"
+    get "analytics", to: "dashboard#analytics"
 
     resources :posts do
       collection do

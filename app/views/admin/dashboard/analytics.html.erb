@@ -1,0 +1,58 @@
+<div class="container-fluid">
+  <h1>Analytics Dashboard</h1>
+
+  <div class="row">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h2>Popular Pages</h2>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Page</th>
+                <th>Views</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @popular_pages.each do |path, count| %>
+                <tr>
+                  <td><%= path %></td>
+                  <td><%= count %></td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header">
+          <h2>Recent Page Views</h2>
+        </div>
+        <div class="card-body">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>Path</th>
+                <th>IP Address</th>
+                <th>Time</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% @page_views.each do |page_view| %>
+                <tr>
+                  <td><%= page_view.path %></td>
+                  <td><%= page_view.ip_address %></td>
+                  <td><%= time_ago_in_words(page_view.created_at) %> ago</td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

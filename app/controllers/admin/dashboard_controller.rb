@@ -10,4 +10,10 @@ class Admin::DashboardController < Admin::ApplicationController
     @recent_posts = []
     @recent_events = []
   end
+
+  def analytics
+    @page_views = PageView.order(created_at: :desc).limit(100)
+    @popular_pages = PageView.group(:path).order("count_all DESC").limit(10).count
+    @search_queries = PageView.where("path LIKE ?", "%search%").group(:path).order("count_all DESC").limit(10).count
+  end
 end

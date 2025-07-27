@@ -1,0 +1,25 @@
+@media print {
+  body {
+    font-family: "Times New Roman", Times, serif;
+    font-size: 12pt;
+    line-height: 1.5;
+  }
+
+  .navbar,
+  .btn,
+  .card-footer,
+  .text-end,
+  .text-muted {
+    display: none;
+  }
+
+  .card {
+    border: none;
+    box-shadow: none;
+  }
+
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+}

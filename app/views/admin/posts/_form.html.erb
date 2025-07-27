@@ -1,10 +1,10 @@
 <%# app/views/admin/posts/_form.html.erb %>
-<%= form_with(model: [:admin, @post], local: true, class: "needs-validation", novalidate: true, data: { controller: "autosave" }) do |form| %>
+<%= form_with(model: [:admin, @post], local: true, class: "needs-validation", novalidate: true, data: { controller: "autosave form-submission validation", validation_target: "form" }) do |form| %>
   <%= render 'shared/error_messages', object: @post %>
 
   <div class="mb-3">
     <%= form.label :title, class: "form-label" %>
-    <%= form.text_field :title, class: "form-control", required: true %>
+    <%= form.text_field :title, class: "form-control", required: true, data: { controller: "focus" } %>
     <div class="invalid-feedback">
       Please provide a title.
     </div>
@@ -35,6 +35,6 @@
 
   <div class="d-flex justify-content-end">
     <%= link_to "Cancel", admin_posts_path, class: "btn btn-secondary me-2" %>
-    <%= form.submit "Save Memo", class: "btn btn-primary" %>
+    <%= form.submit "Save Memo", class: "btn btn-primary", data: { form_submission_target: "submit" } %>
   </div>
 <% end %>

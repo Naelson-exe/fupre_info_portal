@@ -14,67 +14,73 @@
 
 <div class="row">
   <%# Featured Section %>
-  <% if @featured_posts.any? || @featured_events.any? %>
-    <div class="col-12 mb-4">
-      <h2 class="mb-3">Featured</h2>
-      <div class="row">
-        <% (@featured_posts + @featured_events).each do |item| %>
-          <div class="col-md-6 mb-3">
-            <div class="card shadow-sm h-100">
-              <div class="card-body">
-                <h5 class="card-title"><%= item.title %></h5>
-                <% if item.is_a?(Post) %>
-                  <p class="card-text"><%= truncate(item.summary, length: 100) %></p>
-                  <%= link_to "Read More", post_path(item), class: "btn btn-sm btn-outline-primary" %>
-                <% else %>
-                  <p class="card-text text-muted mb-1">Date: <%= item.event_date.strftime("%B %d, %Y") %></p>
-                  <%= link_to "View Details", event_path(item), class: "btn btn-sm btn-outline-secondary" %>
-                <% end %>
+  <% cache "featured_content" do %>
+    <% if @featured_posts.any? || @featured_events.any? %>
+      <div class="col-12 mb-4">
+        <h2 class="mb-3">Featured</h2>
+        <div class="row">
+          <% (@featured_posts + @featured_events).each do |item| %>
+            <div class="col-md-6 mb-3">
+              <div class="card shadow-sm h-100">
+                <div class="card-body">
+                  <h5 class="card-title"><%= item.title %></h5>
+                  <% if item.is_a?(Post) %>
+                    <p class="card-text"><%= truncate(item.summary, length: 100) %></p>
+                    <%= link_to "Read More", post_path(item), class: "btn btn-sm btn-outline-primary" %>
+                  <% else %>
+                    <p class="card-text text-muted mb-1">Date: <%= item.event_date.strftime("%B %d, %Y") %></p>
+                    <%= link_to "View Details", event_path(item), class: "btn btn-sm btn-outline-secondary" %>
+                  <% end %>
+                </div>
               </div>
             </div>
-          </div>
+          <% end %>
+        </div>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%# Latest Memos Section %>
+  <% cache "latest_memos" do %>
+    <div class="col-md-8">
+      <h2 class="mb-3">Latest Memos</h2>
+      <div class="list-group shadow-sm">
+        <% @latest_posts.each do |post| %>
+          <%= link_to post, class: "list-group-item list-group-item-action" do %>
+            <div class="d-flex w-100 justify-content-between">
+              <h5 class="mb-1"><%= post.title %></h5>
+              <small class="text-muted"><%= time_ago_in_words(post.published_at || post.created_at) %> ago</small>
+            </div>
+            <p class="mb-1"><%= truncate(post.content, length: 150) %></p>
+          <% end %>
         <% end %>
+      </div>
+      <div class="mt-3">
+        <%= link_to "View All Memos →", posts_path, class: "btn btn-outline-primary" %>
       </div>
     </div>
   <% end %>
 
-  <%# Latest Memos Section %>
-  <div class="col-md-8">
-    <h2 class="mb-3">Latest Memos</h2>
-    <div class="list-group shadow-sm">
-      <% @latest_posts.each do |post| %>
-        <%= link_to post, class: "list-group-item list-group-item-action" do %>
-          <div class="d-flex w-100 justify-content-between">
-            <h5 class="mb-1"><%= post.title %></h5>
-            <small class="text-muted"><%= time_ago_in_words(post.published_at || post.created_at) %> ago</small>
-          </div>
-          <p class="mb-1"><%= truncate(post.content, length: 150) %></p>
-        <% end %>
-      <% end %>
-    </div>
-    <div class="mt-3">
-      <%= link_to "View All Memos →", posts_path, class: "btn btn-outline-primary" %>
-    </div>
-  </div>
-
   <%# Upcoming Events Section %>
-  <div class="col-md-4">
-    <h2 class="mb-3">Upcoming Events</h2>
-    <div class="card shadow-sm">
-      <div class="card-body">
-        <ul class="list-unstyled">
-          <% @upcoming_events.each do |event| %>
-            <li class="mb-3">
-              <h6 class="card-title"><%= event.title %></h6>
-              <p class="card-text text-muted mb-1">Date: <%= event.event_date.strftime("%B %d, %Y") %></p>
-              <%= link_to "View Details", event_path(event), class: "card-link" %>
-            </li>
-          <% end %>
-        </ul>
+  <% cache "upcoming_events" do %>
+    <div class="col-md-4">
+      <h2 class="mb-3">Upcoming Events</h2>
+      <div class="card shadow-sm">
+        <div class="card-body">
+          <ul class="list-unstyled">
+            <% @upcoming_events.each do |event| %>
+              <li class="mb-3">
+                <h6 class="card-title"><%= event.title %></h6>
+                <p class="card-text text-muted mb-1">Date: <%= event.event_date.strftime("%B %d, %Y") %></p>
+                <%= link_to "View Details", event_path(event), class: "card-link" %>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+      <div class="mt-3">
+        <%= link_to "View Full Calendar →", events_path, class: "btn btn-outline-secondary" %>
       </div>
     </div>
-    <div class="mt-3">
-      <%= link_to "View Full Calendar →", events_path, class: "btn btn-outline-secondary" %>
-    </div>
-  </div>
+  <% end %>
 </div>

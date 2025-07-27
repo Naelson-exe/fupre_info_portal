@@ -93,7 +93,7 @@ class Admin::EventsController < Admin::ApplicationController
   private
 
   def set_event
-    @event = Event.find(params[:id])
+    @event = Event.includes(:admin_user).find(params[:id])
   rescue ActiveRecord::RecordNotFound
     redirect_to admin_events_path, alert: "Event not found."
   end

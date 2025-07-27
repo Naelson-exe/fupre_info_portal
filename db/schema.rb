@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_07_26_184103) do
+ActiveRecord::Schema[7.2].define(version: 2025_07_27_103010) do
   create_table "admin_users", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -40,7 +40,16 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_26_184103) do
     t.index ["created_at"], name: "index_events_on_created_at"
     t.index ["event_date", "event_time"], name: "index_events_on_date_and_time"
     t.index ["event_date"], name: "index_events_on_event_date"
+    t.index ["featured"], name: "index_events_on_featured"
     t.index ["title"], name: "index_events_on_title"
+  end
+
+  create_table "page_views", force: :cascade do |t|
+    t.string "path"
+    t.string "user_agent"
+    t.string "ip_address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "posts", force: :cascade do |t|
@@ -56,6 +65,7 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_26_184103) do
     t.index ["admin_user_id", "created_at"], name: "index_posts_on_admin_and_created_at"
     t.index ["admin_user_id"], name: "index_posts_on_admin_user_id"
     t.index ["created_at"], name: "index_posts_on_created_at"
+    t.index ["featured"], name: "index_posts_on_featured"
     t.index ["status"], name: "index_posts_on_status"
     t.index ["title"], name: "index_posts_on_title"
   end

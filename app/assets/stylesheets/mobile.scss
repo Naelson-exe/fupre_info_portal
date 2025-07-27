@@ -1,0 +1,39 @@
+/* Mobile-specific styles */
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #fff;
+    border-top: 1px solid #dee2e6;
+    z-index: 1000;
+  }
+
+  .navbar-nav {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 767.98px) {
+  .table-responsive {
+    font-size: 0.875rem;
+  }
+
+  .table th,
+  .table td {
+    padding: 0.5rem;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .btn {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+  }
+}
