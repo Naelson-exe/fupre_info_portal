@@ -55,10 +55,6 @@
                 <%= link_to "About", about_path, class: "nav-link" %>
               </li>
             </ul>
-            <%= form_with url: search_path, method: :get, class: "d-flex" do |form| %>
-              <%= form.text_field :search, class: "form-control me-2", placeholder: "Search...", "aria-label": "Search" %>
-              <%= form.submit "Search", class: "btn btn-outline-success" %>
-            <% end %>
             <ul class="navbar-nav ms-auto">
               <li class="nav-item">
                 <%= link_to admin_root_path, class: "btn btn-outline-primary" do %>
