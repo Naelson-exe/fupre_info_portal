@@ -2,7 +2,7 @@ class Post < ApplicationRecord
   belongs_to :admin_user
 
   # Status management
-  enum status: { draft: 0, published: 1, archived: 2 }
+  enum :status, { draft: 0, published: 1, archived: 2 }
   validates :status, inclusion: { in: statuses.keys }
   validates :title, presence: true, length: { minimum: 3, maximum: 255 }
   validates :content, presence: true
@@ -40,6 +40,6 @@ class Post < ApplicationRecord
   private
 
   def set_published_at
-    self.published_at = Time.current if self.published?
+    self.published_at = Time.current
   end
 end

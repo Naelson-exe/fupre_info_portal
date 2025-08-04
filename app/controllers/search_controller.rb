@@ -1,25 +1,15 @@
 class SearchController < ApplicationController
+  include Pagy::Backend
+
   def index
-    @query = params[:query]
-    @search_scope = params[:search_scope]&.to_sym
-
-    if @query.blank? && @search_scope.blank?
-      @results = []
+    @query = params[:search]
+    if @query.present?
+      posts = Post.published.search(@query)
+      events = Event.upcoming.search(@query)
+      results = (posts + events).sort_by(&:created_at).reverse
+      @pagy, @results = pagy_array(results, items: 10)
     else
-      @results = case @search_scope
-      when :post
-                   Post.published.search(@query)
-      when :event
-                   events = Event.upcoming.search(@query)
-                   events = events.where("event_date >= ?", params[:start_date]) if params[:start_date].present?
-                   events = events.where("event_date <= ?", params[:end_date]) if params[:end_date].present?
-                   events
-      else
-                   (Post.published.search(@query) + Event.upcoming.search(@query)).sort_by(&:created_at).reverse
-      end
+      @results = []
     end
-
-    # Simple pagination
-    @results = Kaminari.paginate_array(@results).page(params[:page]).per(10)
   end
 end

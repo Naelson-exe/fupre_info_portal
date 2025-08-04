@@ -5,7 +5,8 @@ gem "rails", "~> 7.2.2", ">= 7.2.2.1"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 # Use sqlite3 as the database for Active Record
-gem "sqlite3", ">= 1.4"
+gem "sqlite3", ">= 1.4", group: :development
+gem "pg", group: :production
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", ">= 5.0"
 # Use JavaScript with ESM import maps [https://github.com/rails/importmap-rails]
@@ -24,6 +25,7 @@ gem "jbuilder"
 
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 gem "bcrypt", "~> 3.1.17"
+gem "rack-attack"
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ windows jruby ]
@@ -54,6 +56,7 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console", "~> 4.2.1"
+  gem "bullet"
 end
 
 group :test do
@@ -62,8 +65,11 @@ group :test do
   gem "webdrivers"
   gem "database_cleaner-active_record"
   gem "warden"
+  gem "rails-controller-testing"
 end
 
 gem "bootstrap", "~> 5.3"
 gem "sassc-rails"
 gem "pagy"
+gem "sanitize"
+gem "figaro"

@@ -1,12 +1,12 @@
 <div class="container my-4">
   <h1 class="mb-4">Search Results</h1>
 
-  <%= render 'shared/search_form', query: @query %>
+  <%= render 'shared/search_form', url: search_path, search_scope: :all, query: @query %>
 
   <% if @query.blank? %>
     <p class="text-muted">Please enter a search term to begin.</p>
   <% elsif @results.empty? %>
-    <p class="text-muted">No results found for "<%= @query %>".</p>
+    <p class="text-muted">No results found.</p>
   <% else %>
     <div class="list-group">
       <% @results.each do |result| %>
@@ -22,7 +22,7 @@
     </div>
 
     <div class="mt-4">
-      <%= paginate @results %>
+      <%== pagy_nav(@pagy) %>
     </div>
   <% end %>
 </div>

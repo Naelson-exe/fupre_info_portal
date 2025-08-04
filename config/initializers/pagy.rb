@@ -11,6 +11,7 @@ Pagy::DEFAULT[:items] = 10
 # require 'pagy/extras/bootstrap'
 require "pagy/extras/bootstrap"
 require "pagy/extras/i18n"
+require "pagy/extras/array"
 
 # When you are done setting up your pagy configuration, remove the following line
 # to avoid showing the warning message.

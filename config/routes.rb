@@ -1,12 +1,13 @@
 Rails.application.routes.draw do
   root "home#index"
+  get "health", to: "health#show"
 
   get "/manifest.json", to: "pwa#manifest", defaults: { format: :json }
 
   # Public routes with custom paths
   resources :posts, only: [ :index, :show ], path: "memos"
   resources :events, only: [ :index, :show ], path: "calendar"
-  get "about", to: "pages#about"
+  get "about", to: "home#about"
   get "search", to: "search#index"
 
   # Admin namespace
@@ -33,4 +34,7 @@ Rails.application.routes.draw do
   if Rails.env.development? || Rails.env.test?
     get "up" => "rails/health#show", as: :rails_health_check
   end
+
+  # Catches all other routes and redirects to the root path with a flash message
+  match "*path", to: "application#not_found", via: :all
 end

@@ -1,0 +1,14 @@
+defaults: &defaults
+  app_name: "Fupre Info Portal"
+  app_host: "localhost:3000"
+  admin_email: "admin@example.com"
+
+development:
+  <<: *defaults
+
+test:
+  <<: *defaults
+
+production:
+  <<: *defaults
+  app_host: "fupre-info-portal.com"
