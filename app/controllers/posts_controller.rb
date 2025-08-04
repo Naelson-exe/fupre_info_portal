@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :set_post, only: [ :show ]
 
   def index
-    @posts = Post.published.includes(:admin_user)
+    @posts = Post.published
 
     if params[:search].present?
       search_term = "%#{params[:search]}%"
