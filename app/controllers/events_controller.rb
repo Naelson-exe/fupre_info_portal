@@ -2,11 +2,8 @@ class EventsController < ApplicationController
   before_action :set_event, only: [ :show ]
 
   def index
-    @upcoming_events = Event.where("event_date >= ?", Date.current)
-                           .order(:event_date, :event_time)
-
-    @past_events = Event.where("event_date < ?", Date.current)
-                       .order(event_date: :desc, event_time: :desc)
+    @upcoming_events = Event.upcoming.order(:start_date, :event_time)
+    @past_events = Event.past.order(start_date: :desc, event_time: :desc)
 
     if params[:search].present?
       search_term = "%#{params[:search]}%"

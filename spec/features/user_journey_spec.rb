@@ -23,9 +23,8 @@ RSpec.feature 'User Journey', type: :feature do
   end
 
   scenario 'searching for content' do
-    visit root_path
-
-    fill_in 'Search...', with: 'Ruby'
+    visit search_path
+    fill_in 'query', with: 'Ruby'
     click_button 'Search'
 
     expect(page).to have_content('First Post')

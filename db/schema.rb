@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_07_27_103010) do
+ActiveRecord::Schema[7.2].define(version: 2025_08_08_143621) do
   create_table "admin_users", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -32,15 +32,17 @@ ActiveRecord::Schema[7.2].define(version: 2025_07_27_103010) do
     t.integer "admin_user_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.date "event_date", null: false
+    t.date "start_date", null: false
     t.time "event_time"
     t.boolean "featured"
+    t.date "end_date"
+    t.string "event_type", default: "event", null: false
     t.index ["admin_user_id", "created_at"], name: "index_events_on_admin_and_created_at"
     t.index ["admin_user_id"], name: "index_events_on_admin_user_id"
     t.index ["created_at"], name: "index_events_on_created_at"
-    t.index ["event_date", "event_time"], name: "index_events_on_date_and_time"
-    t.index ["event_date"], name: "index_events_on_event_date"
     t.index ["featured"], name: "index_events_on_featured"
+    t.index ["start_date", "event_time"], name: "index_events_on_date_and_time"
+    t.index ["start_date"], name: "index_events_on_start_date"
     t.index ["title"], name: "index_events_on_title"
   end
 

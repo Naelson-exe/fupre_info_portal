@@ -2,7 +2,7 @@ class Admin::PostsController < Admin::ApplicationController
   before_action :set_post, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @posts = Post.includes(:admin_user)
+    @posts = Post.all
 
     # Status filtering
     if params[:status].present? && Post.statuses.key?(params[:status])
@@ -71,7 +71,7 @@ class Admin::PostsController < Admin::ApplicationController
 
   def search
     # AJAX search endpoint
-    @posts = Post.includes(:admin_user)
+    @posts = Post.all
 
     if params[:q].present?
       search_term = "%#{params[:q]}%"
@@ -85,7 +85,7 @@ class Admin::PostsController < Admin::ApplicationController
   private
 
   def set_post
-    @post = Post.includes(:admin_user).find(params[:id])
+    @post = Post.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     redirect_to admin_posts_path, alert: "Post not found."
   end

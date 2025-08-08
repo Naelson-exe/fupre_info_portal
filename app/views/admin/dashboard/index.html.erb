@@ -67,7 +67,7 @@
             <%= link_to admin_event_path(event), class: "list-group-item list-group-item-action" do %>
               <div class="d-flex w-100 justify-content-between">
                 <h6 class="mb-1"><%= event.title %></h6>
-                <small class="text-muted"><%= event.event_date.to_formatted_s(:short) %></small>
+                <small class="text-muted"><%= event.formatted_date %></small>
               </div>
               <p class="mb-1 text-muted"><%= truncate(event.details, length: 80) %></p>
             <% end %>

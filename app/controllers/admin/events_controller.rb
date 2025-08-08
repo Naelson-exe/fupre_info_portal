@@ -2,14 +2,14 @@ class Admin::EventsController < Admin::ApplicationController
   before_action :set_event, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @events = Event.includes(:admin_user)
+    @events = Event.all
 
     # Filter by upcoming/past
     case params[:filter]
     when "upcoming"
-      @events = @events.where("event_date >= ?", Date.current)
+      @events = @events.upcoming
     when "past"
-      @events = @events.where("event_date < ?", Date.current)
+      @events = @events.past
     end
 
     # Search functionality
@@ -24,7 +24,7 @@ class Admin::EventsController < Admin::ApplicationController
       direction = params[:direction] == "desc" ? :desc : :asc
       @events = @events.order(params[:sort] => direction)
     else
-      @events = @events.order(:event_date, :event_time)
+      @events = @events.order(:start_date, :event_time)
     end
   end
 
@@ -74,7 +74,7 @@ class Admin::EventsController < Admin::ApplicationController
 
   def search
     # AJAX search endpoint
-    @events = Event.includes(:admin_user)
+    @events = Event.all
 
     if params[:q].present?
       search_term = "%#{params[:q]}%"
@@ -93,12 +93,12 @@ class Admin::EventsController < Admin::ApplicationController
   private
 
   def set_event
-    @event = Event.includes(:admin_user).find(params[:id])
+    @event = Event.find(params[:id])
   rescue ActiveRecord::RecordNotFound
     redirect_to admin_events_path, alert: "Event not found."
   end
 
   def event_params
-    params.require(:event).permit(:title, :details, :event_date, :event_time, :featured)
+    params.require(:event).permit(:title, :details, :start_date, :end_date, :event_time, :event_type, :featured)
   end
 end

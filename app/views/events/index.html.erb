@@ -28,8 +28,22 @@
         <% @upcoming_events.each do |event| %>
           <li class="list-group-item d-flex justify-content-between align-items-center">
             <div>
-              <h5 class="mb-1"><%= link_to event.title, event_path(event), class: "text-decoration-none" %></h5>
-              <p class="mb-1 text-muted">Date: <%= event.event_date.to_fs(:long) %><% if event.event_time.present? %> at <%= event.event_time.strftime("%I:%M %p") %><% end %></p>
+              <h5 class="mb-1">
+                <%= link_to event.title, event_path(event), class: "text-decoration-none" %>
+                <% if event.deadline? %>
+                  <span class="badge bg-warning text-dark">Deadline</span>
+                <% end %>
+              </h5>
+              <p class="mb-1 text-muted">
+                <% if event.start_date.present? && event.end_date.present? %>
+                  Date: <%= event.start_date.to_fs(:long) %> - <%= event.end_date.to_fs(:long) %>
+                <% elsif event.start_date.present? %>
+                  Date: <%= event.start_date.to_fs(:long) %>
+                <% elsif event.end_date.present? %>
+                  Deadline: <%= event.end_date.to_fs(:long) %>
+                <% end %>
+                <% if event.event_time.present? %> at <%= event.event_time.strftime("%I:%M %p") %><% end %>
+              </p>
               <p class="mb-0"><%= truncate(event.details, length: 100) %></p>
             </div>
             <%= link_to "View Details", event_path(event), class: "btn btn-sm btn-outline-primary" %>
@@ -56,8 +70,19 @@
         <% @past_events.each do |event| %>
           <li class="list-group-item d-flex justify-content-between align-items-center">
             <div>
-              <h5 class="mb-1"><%= link_to event.title, event_path(event), class: "text-decoration-none" %></h5>
-              <p class="mb-1 text-muted">Date: <%= event.event_date.to_fs(:long) %></p>
+              <h5 class="mb-1">
+                <%= link_to event.title, event_path(event), class: "text-decoration-none" %>
+                <% if event.deadline? %>
+                  <span class="badge bg-warning text-dark">Deadline</span>
+                <% end %>
+              </h5>
+              <p class="mb-1 text-muted">
+                <% if event.start_date.present? %>
+                  Date: <%= event.start_date.to_fs(:long) %>
+                <% elsif event.end_date.present? %>
+                  Deadline: <%= event.end_date.to_fs(:long) %>
+                <% end %>
+              </p>
             </div>
             <span class="badge bg-light text-dark">Concluded</span>
           </li>

@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "trix";
 
 // Design System Variables
 
@@ -123,3 +124,15 @@ body {
 }
 
 @import "mobile";
+
+.navbar-toggler {
+  border: 1px solid #dee2e6;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.navbar-toggler-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

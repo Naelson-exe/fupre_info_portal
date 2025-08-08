@@ -4,16 +4,16 @@ class HomeController < ApplicationController
                          .order(published_at: :desc, created_at: :desc)
                          .limit(2)
     @featured_events = Event.where(featured: true)
-                           .where("event_date >= ?", Date.current)
-                           .order(:event_date, :event_time)
+                           .upcoming
+                           .order(:start_date, :event_time)
                            .limit(2)
 
     @latest_posts = Post.published
                        .order(published_at: :desc, created_at: :desc)
                        .limit(3)
 
-    @upcoming_events = Event.where("event_date >= ?", Date.current)
-                           .order(:event_date, :event_time)
+    @upcoming_events = Event.upcoming
+                           .order(:start_date, :event_time)
                            .limit(3)
   rescue => e
     Rails.logger.error "Error loading homepage data: #{e.message}"

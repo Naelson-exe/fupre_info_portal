@@ -2,7 +2,7 @@ class SearchController < ApplicationController
   include Pagy::Backend
 
   def index
-    @query = params[:search]
+    @query = params[:query]
     if @query.present?
       posts = Post.published.search(@query)
       events = Event.upcoming.search(@query)

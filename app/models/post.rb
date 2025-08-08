@@ -9,7 +9,7 @@ class Post < ApplicationRecord
   validates :summary, length: { maximum: 500 }, allow_blank: true
 
   # Timestamps
-  before_save :set_published_at, if: -> { status_changed? && published? }
+  before_save :set_published_at, if: -> { status_changed? && status == "published" }
 
   # Search scopes
   scope :with_title, ->(query) { where("LOWER(title) LIKE ?", "%#{query.downcase}%") }

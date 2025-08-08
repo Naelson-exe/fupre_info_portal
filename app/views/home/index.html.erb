@@ -28,7 +28,13 @@
                     <p class="card-text"><%= truncate(item.try(:summary) || item.content, length: 100) %></p>
                     <%= link_to "Read More", post_path(item), class: "btn btn-sm btn-outline-primary" %>
                   <% else %>
-                    <p class="card-text text-muted mb-1">Date: <%= item.event_date.strftime("%B %d, %Y") %></p>
+                    <p class="card-text text-muted mb-1">
+                      <% if item.start_date.present? %>
+                        Date: <%= item.start_date.strftime("%B %d, %Y") %>
+                      <% elsif item.end_date.present? %>
+                        Deadline: <%= item.end_date.strftime("%B %d, %Y") %>
+                      <% end %>
+                    </p>
                     <%= link_to "View Details", event_path(item), class: "btn btn-sm btn-outline-secondary" %>
                   <% end %>
                 </div>
@@ -73,7 +79,13 @@
             <% @upcoming_events.each do |event| %>
               <li class="mb-3">
                 <h6 class="card-title mb-1"><%= event.title %></h6>
-                <p class="card-text text-muted mb-1">Date: <%= event.event_date.strftime("%B %d, %Y") %></p>
+                <p class="card-text text-muted mb-1">
+                  <% if event.start_date.present? %>
+                    Date: <%= event.start_date.strftime("%B %d, %Y") %>
+                  <% elsif event.end_date.present? %>
+                    Deadline: <%= event.end_date.strftime("%B %d, %Y") %>
+                  <% end %>
+                </p>
                 <%= link_to "View Details", event_path(event), class: "card-link" %>
               </li>
             <% end %>
