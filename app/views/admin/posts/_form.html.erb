@@ -4,7 +4,7 @@
 
   <div class="mb-3">
     <%= form.label :title, class: "form-label" %>
-    <%= form.text_field :title, class: "form-control", required: true, data: { controller: "focus" } %>
+    <%= form.text_field :title, class: "form-control", required: true %>
     <div class="invalid-feedback">
       Please provide a title.
     </div>
@@ -20,12 +20,22 @@
 
   <div class="mb-3">
     <%= form.label :content, class: "form-label" %>
-    <%= form.rich_text_area :content, class: "form-control", style: "height: 250px;" %>
+    <%= form.text_area :content, class: "form-control", style: "height: 250px;" %>
   </div>
 
   <div class="mb-3">
     <%= form.label :status, class: "form-label" %>
     <%= form.select :status, Post.statuses.keys.map { |status| [status.humanize, status] }, {}, class: "form-select" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :post_type, class: "form-label" %>
+    <%= form.select :post_type, Post.post_types.keys.map { |pt| [pt.humanize, pt] }, {}, class: "form-select" %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :severity, class: "form-label" %>
+    <%= form.select :severity, Post.severities.keys.map { |s| [s.humanize, s] }, {}, class: "form-select" %>
   </div>
 
   <div class="mb-3 form-check">

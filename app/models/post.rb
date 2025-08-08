@@ -3,7 +3,14 @@ class Post < ApplicationRecord
 
   # Status management
   enum :status, { draft: 0, published: 1, archived: 2 }
+  attribute :post_type, :integer
+  enum :post_type, { announcement: 0, memo: 1 }
+  attribute :severity, :integer
+  enum :severity, { low: 0, medium: 1, high: 2 }
+
   validates :status, inclusion: { in: statuses.keys }
+  validates :post_type, inclusion: { in: post_types.keys }
+  validates :severity, inclusion: { in: severities.keys }
   validates :title, presence: true, length: { minimum: 3, maximum: 255 }
   validates :content, presence: true
   validates :summary, length: { maximum: 500 }, allow_blank: true

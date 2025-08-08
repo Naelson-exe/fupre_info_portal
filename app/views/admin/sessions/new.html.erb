@@ -11,13 +11,6 @@
       <div class="card-body">
         <h3 class="card-title text-center mb-4">Admin Login</h3>
         
-        <% if flash[:notice] %>
-          <div class="alert alert-success"><%= flash[:notice] %></div>
-        <% end %>
-        <% if flash[:alert] %>
-          <div class="alert alert-danger"><%= flash[:alert] %></div>
-        <% end %>
-        
         <%= form_with url: admin_authenticate_path, local: true do |form| %>
           <div class="mb-3">
             <%= form.label :email, class: "form-label" %>
@@ -34,15 +27,5 @@
       </div>
     </div>
   </div>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      setTimeout(function() {
-        let flashMessages = document.querySelectorAll(".alert");
-        flashMessages.forEach(function(message) {
-          message.style.display = "none";
-        });
-      }, 20000);
-    });
-  </script>
 </body>
 </html>

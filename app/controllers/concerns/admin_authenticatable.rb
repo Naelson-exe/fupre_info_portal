@@ -18,7 +18,6 @@ module AdminAuthenticatable
   def authenticate_admin_user!
     return if admin_user_signed_in?
 
-    flash.now[:alert] = "You must be logged in to access this page."
     redirect_to admin_login_path, alert: "You need to sign in or sign up before continuing."
   end
 

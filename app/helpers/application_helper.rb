@@ -43,4 +43,19 @@ module ApplicationHelper
     direction = (column.to_s == params[:sort] && params[:direction] == "asc") ? "desc" : "asc"
     link_to name, request.params.merge(sort: column, direction: direction), **options
   end
+
+  def severity_badge(severity)
+    base_class = "badge"
+    severity_class = case severity.to_sym
+    when :low
+      "badge-info"
+    when :medium
+      "badge-warning"
+    when :high
+      "badge-danger"
+    else
+      "badge-light"
+    end
+    content_tag(:span, severity.humanize, class: "#{base_class} #{severity_class}")
+  end
 end

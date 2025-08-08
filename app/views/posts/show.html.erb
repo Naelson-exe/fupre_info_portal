@@ -10,22 +10,51 @@
   </ol>
 </nav>
 
-<div class="card shadow-sm">
+<div class="card shadow-sm" id="memo-container" data-controller="memo-downloader" data-memo-downloader-target="container">
   <div class="card-body">
-    <%# Memo Header %>
-    <h1 class="card-title h2"><%= @post.title %></h1>
-    <p class="card-subtitle mb-3 text-muted">Published on: <%= @post.published_at&.to_fs(:long) %></p>
-    
+    <div class="text-center mb-4">
+      <%= image_tag 'logo.png', alt: 'School Logo', class: 'img-fluid', style: 'max-height: 100px;' %>
+      <h2 class="h4 mt-2">Federal University of Petroleum Resources, Effurun</h2>
+      <p class="lead">Office of the Vice Chancellor</p>
+    </div>
+
     <hr>
 
-    <%# Memo Content %>
+    <div class="d-flex justify-content-between mb-3">
+      <div>
+        <strong>From:</strong> The Vice Chancellor
+      </div>
+      <div>
+        <strong>To:</strong> All Staff and Students
+      </div>
+    </div>
+
+    <div class="text-end mb-4">
+      <strong>Date:</strong> <%= @post.published_at&.to_fs(:long) %>
+    </div>
+
+    <h1 class="card-title h3 text-center mb-4"><%= @post.title %></h1>
+
     <div class="card-text mt-4">
       <%= @post.content %>
+    </div>
+
+    <div class="mt-5">
+      <p class="mb-0">Sincerely,</p>
+      <p><strong>[Sender's Name]</strong></p>
+      <p><em>[Sender's Title]</em></p>
     </div>
   </div>
 </div>
 
-<%# Back to Memos Link %>
-<div class="mt-4">
+<div class="mt-4 d-flex justify-content-between">
   <%= link_to "← Back to All Memos", posts_path, class: "btn btn-outline-primary" %>
+  <div>
+    <button data-action="click->memo-downloader#downloadPdf" class="btn btn-outline-primary">
+      <i class="bi bi-file-earmark-arrow-down"></i> Download as PDF
+    </button>
+    <button data-action="click->memo-downloader#downloadJpg" class="btn btn-outline-secondary">
+      <i class="bi bi-image"></i> Download as JPG
+    </button>
+  </div>
 </div>

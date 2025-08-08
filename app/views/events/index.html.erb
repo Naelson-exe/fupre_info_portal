@@ -1,8 +1,12 @@
 <% content_for :title, "Academic Calendar & Events" %>
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-  <h1 class="h2">Academic Calendar & Events</h1>
-  <%= render 'shared/search_form', query: params[:query], search_scope: :event, url: events_path %>
+<div class="header-container">
+  <div class="title-container">
+    <h1 class="h2">Academic Calendar & Events</h1>
+  </div>
+  <div class="search-container">
+    <%= render 'shared/search_form', query: params[:query], search_scope: :event, url: events_path %>
+  </div>
 </div>
 
 <div class="d-flex justify-content-end mb-3">

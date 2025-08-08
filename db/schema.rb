@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.2].define(version: 2025_08_08_143621) do
+ActiveRecord::Schema[7.2].define(version: 2025_08_08_221920) do
   create_table "admin_users", force: :cascade do |t|
     t.string "email", null: false
     t.string "password_digest", null: false
@@ -64,6 +64,8 @@ ActiveRecord::Schema[7.2].define(version: 2025_08_08_143621) do
     t.datetime "updated_at", null: false
     t.datetime "published_at"
     t.boolean "featured"
+    t.integer "post_type"
+    t.integer "severity"
     t.index ["admin_user_id", "created_at"], name: "index_posts_on_admin_and_created_at"
     t.index ["admin_user_id"], name: "index_posts_on_admin_user_id"
     t.index ["created_at"], name: "index_posts_on_created_at"
