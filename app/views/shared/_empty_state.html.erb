@@ -1,0 +1,6 @@
+<div class="empty-state">
+  <%= render_svg "empty_state", class: "empty-state__icon" %>
+  <h3 class="empty-state__title"><%= title %></h3>
+  <p class="empty-state__message"><%= message %></p>
+  <%= link_to button_text, button_path, class: "btn btn-primary" if defined?(button_text) && defined?(button_path) %>
+</div>

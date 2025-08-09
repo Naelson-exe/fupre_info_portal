@@ -91,6 +91,6 @@ class Admin::PostsController < Admin::ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :summary, :content, :status, :featured, :post_type, :severity)
+    params.require(:post).permit(:title, :summary, :content, :status, :featured, :post_type, :severity, :source, :sender_name, :sender_title)
   end
 end

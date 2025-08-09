@@ -7,10 +7,12 @@ class Post < ApplicationRecord
   enum :post_type, { announcement: 0, memo: 1 }
   attribute :severity, :integer
   enum :severity, { low: 0, medium: 1, high: 2 }
+  enum :source, { vc_office: 0, registrar: 1, bursary: 2, dean_of_students: 3 }
 
   validates :status, inclusion: { in: statuses.keys }
   validates :post_type, inclusion: { in: post_types.keys }
   validates :severity, inclusion: { in: severities.keys }
+  validates :source, inclusion: { in: sources.keys }
   validates :title, presence: true, length: { minimum: 3, maximum: 255 }
   validates :content, presence: true
   validates :summary, length: { maximum: 500 }, allow_blank: true

@@ -15,31 +15,40 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  width: 50%;
+  margin-left: auto;
 }
 
 // Design System Variables
 
 // Color Palette
-$deep-blue: #003366;
-$gold-accent: #C49A6C;
-$soft-gray: #F5F5F5;
-$charcoal: #333333;
+$primary-brand: #0A4A8F;
+$secondary-brand: #A67C52;
+$primary-accent: #FFD700;
+$neutral-light: #F8F9FA;
+$neutral-dark: #212529;
 $white: #FFFFFF;
+$success: #28A745;
+$danger: #DC3545;
+$warning: #FFC107;
 
 // Typography
 $font-family-headings: 'Montserrat', sans-serif;
 $font-family-body: 'Roboto', sans-serif;
 
+@import "background";
+@import "empty_state";
+
 // Base Styles
 body {
-  background-color: $soft-gray;
-  color: $charcoal;
+  background-color: $neutral-light;
+  color: $neutral-dark;
   font-family: $font-family-body;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: $font-family-headings;
-  color: $deep-blue;
+  color: $primary-brand;
 }
 
 // Typography Scale
@@ -83,72 +92,133 @@ body {
 .btn {
   min-height: 2.75rem;
   min-width: 2.75rem;
-  border-radius: 0.375rem;
+  border-radius: 12px;
   padding: 0.75rem 1.5rem;
 }
 
 .btn-primary {
-  background-color: $deep-blue;
+  background-color: $primary-brand;
   color: $white;
   border: none;
 
   &:hover {
-    background-color: darken($deep-blue, 10%);
+    background-color: darken($primary-brand, 10%);
   }
 }
 
 .btn-secondary {
-  background-color: $gold-accent;
-  color: $charcoal;
+  background-color: $secondary-brand;
+  color: $white;
   border: none;
 
   &:hover {
-    background-color: darken($gold-accent, 10%);
+    background-color: darken($secondary-brand, 10%);
   }
 }
 
 .btn:disabled {
-  background-color: $soft-gray;
-  color: $charcoal;
+  background-color: $neutral-light;
+  color: $neutral-dark;
   opacity: 0.5;
 }
 
 // Cards
 .card {
-  background-color: $white;
-  border: 1px solid $soft-gray;
-  border-radius: 0.5rem;
+  background-color: $neutral-light;
+  border-radius: 20px;
   padding: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  box-shadow: 9px 9px 16px rgba(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5);
 }
 
 // Forms
 .form-control {
   background-color: $white;
-  border: 1px solid $soft-gray;
-  border-radius: 0.375rem;
+  border: 1px solid #dee2e6;
+  border-radius: 12px;
   padding: 0.75rem 1rem;
 
   &:focus {
-    border-color: $deep-blue;
-    box-shadow: 0 0 0 0.2rem rgba($deep-blue, 0.25);
+    border-color: $primary-brand;
+    box-shadow: 0 0 0 0.2rem rgba($primary-brand, 0.25);
   }
+}
+
+.input-group .form-control {
+  border-radius: 0.5rem 0 0 0.5rem;
+}
+
+.input-group .btn {
+  border-radius: 0 0.5rem 0.5rem 0;
 }
 
 .form-label {
   font-weight: 600;
 }
 
+// Custom Styles
+.navbar {
+  transition: background-color 0.3s ease;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  .nav-item {
+    margin: 0 0.5rem;
+  }
+  .nav-link {
+    font-weight: 500;
+    color: $neutral-dark;
+    transition: color 0.3s ease;
+    padding: 0.5rem 1rem;
+    border-radius: 0.5rem;
+
+    &:hover {
+      color: $primary-brand;
+      background-color: $neutral-light;
+    }
+  }
+
+  .navbar-brand {
+    .fw-bold {
+      color: $primary-brand;
+    }
+  }
+}
+
+.navbar-nav .nav-link.active,
+.navbar-nav .nav-link.show {
+  color: $primary-brand;
+  font-weight: 700;
+}
+
+.btn-primary {
+  background-image: linear-gradient(to right, #{$primary-brand}, #{darken($primary-brand, 10%)});
+  border: none;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+  }
+}
+
+.post-card {
+  border-radius: 1rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+}
+
+.announcement-card {
+  border: 1px solid $warning;
+}
+
+.memo-card {
+  border: 1px solid $primary-brand;
+}
+
+.main-container {
+  width: 90%;
+  margin: 0 auto;
+  background-color: $white;
+  padding: 2rem;
+  border-radius: 20px;
+}
+
 @import "mobile";
-
-.navbar-toggler {
-  border: 1px solid #dee2e6;
-  border-radius: 0.25rem;
-  padding: 0.25rem 0.5rem;
-}
-
-.navbar-toggler-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}

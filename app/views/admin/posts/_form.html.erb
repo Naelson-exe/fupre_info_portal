@@ -1,5 +1,5 @@
 <%# app/views/admin/posts/_form.html.erb %>
-<%= form_with(model: [:admin, @post], local: true, class: "needs-validation", novalidate: true, data: { controller: "autosave form-submission validation", validation_target: "form" }) do |form| %>
+<%= form_with(model: [:admin, @post], local: true, class: "needs-validation", novalidate: true, data: { controller: "autosave form-submission validation sender post-form", validation_target: "form", sender_options: office_sender_options.to_json }) do |form| %>
   <%= render 'shared/error_messages', object: @post %>
 
   <div class="mb-3">
@@ -30,12 +30,29 @@
 
   <div class="mb-3">
     <%= form.label :post_type, class: "form-label" %>
-    <%= form.select :post_type, Post.post_types.keys.map { |pt| [pt.humanize, pt] }, {}, class: "form-select" %>
+    <%= form.select :post_type, Post.post_types.keys.map { |pt| [pt.humanize, pt] }, {}, class: "form-select", data: { action: "change->post-form#toggleMemoFields", post_form_target: "postType" } %>
   </div>
 
   <div class="mb-3">
     <%= form.label :severity, class: "form-label" %>
     <%= form.select :severity, Post.severities.keys.map { |s| [s.humanize, s] }, {}, class: "form-select" %>
+  </div>
+
+  <div data-post-form-target="memoFields">
+    <div class="mb-3">
+      <%= form.label :source, class: "form-label" %>
+      <%= form.select :source, Post.sources.keys.map { |source| [source.humanize, source] }, {}, class: "form-select", data: { action: "change->sender#updateSender", sender_target: "source" } %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :sender_name, class: "form-label" %>
+      <%= form.text_field :sender_name, class: "form-control", data: { sender_target: "senderName" } %>
+    </div>
+
+    <div class="mb-3">
+      <%= form.label :sender_title, class: "form-label" %>
+      <%= form.text_field :sender_title, class: "form-control", data: { sender_target: "senderTitle" } %>
+    </div>
   </div>
 
   <div class="mb-3 form-check">

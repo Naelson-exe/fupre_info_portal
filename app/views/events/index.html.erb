@@ -4,7 +4,7 @@
   <div class="title-container">
     <h1 class="h2">Academic Calendar & Events</h1>
   </div>
-  <div class="search-container">
+  <div class="search-container event-search">
     <%= render 'shared/search_form', query: params[:query], search_scope: :event, url: events_path %>
   </div>
 </div>
@@ -54,9 +54,9 @@
           </li>
         <% end %>
       <% else %>
-        <li class="list-group-item">
-          <p class="text-center my-4">No upcoming events found.</p>
-        </li>
+        <%= render 'shared/empty_state',
+                   title: "No Upcoming Events",
+                   message: "There are no upcoming events at this time. Please check back later." %>
       <% end %>
     </ul>
   </div>
@@ -92,9 +92,9 @@
           </li>
         <% end %>
       <% else %>
-        <li class="list-group-item">
-          <p class="text-center my-4">No past events found.</p>
-        </li>
+        <%= render 'shared/empty_state',
+                   title: "No Past Events",
+                   message: "There are no past events to display." %>
       <% end %>
     </ul>
   </div>

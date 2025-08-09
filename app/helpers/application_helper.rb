@@ -58,4 +58,26 @@ module ApplicationHelper
     end
     content_tag(:span, severity.humanize, class: "#{base_class} #{severity_class}")
   end
+
+  def office_sender_options
+    {
+      vc_office: { name: "Prof. Engr. Akpofure Rim-Rukeh", title: "Vice Chancellor" },
+      registrar: { name: "Mrs. O.D. Ivwighreghweta", title: "Registrar" },
+      bursary: { name: "Mr. Garba Yau", title: "Bursar" },
+      dean_of_students: { name: "Dr. Alex O. Ogedegbe", title: "Dean of Student Affairs" }
+    }
+  end
+
+  def render_svg(name, options = {})
+    path = Rails.root.join("app", "assets", "images", "#{name}.svg")
+    return "" unless File.exist?(path)
+
+    svg = File.read(path)
+    doc = Nokogiri::HTML::DocumentFragment.parse(svg)
+    svg_tag = doc.at_css "svg"
+
+    options.each { |attr, value| svg_tag[attr.to_s] = value }
+
+    doc.to_html.html_safe
+  end
 end

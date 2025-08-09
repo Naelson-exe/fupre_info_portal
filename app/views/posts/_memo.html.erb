@@ -1,0 +1,39 @@
+<div class="card post-card memo-card" id="memo-container" data-controller="memo-downloader" data-memo-downloader-target="container">
+  <div class="card-body">
+    <div class="text-center mb-4">
+      <%= image_tag 'logo.png', alt: 'School Logo', class: 'img-fluid', style: 'max-height: 100px;' %>
+      <h2 class="h4 mt-2">Federal University of Petroleum Resources, Effurun</h2>
+      <p class="lead">Office of the Vice Chancellor</p>
+    </div>
+
+    <hr>
+
+    <div class="d-flex justify-content-between mb-3">
+      <div>
+        <strong>From:</strong> <%= post.source.humanize %>
+      </div>
+      <div>
+        <strong>To:</strong> All Staff and Students
+      </div>
+    </div>
+
+    <div class="text-end mb-4">
+      <strong>Date:</strong> <%= post.published_at&.to_fs(:long) %>
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <h1 class="card-title h3 text-center mb-4"><%= post.title %></h1>
+      <%= severity_badge(post.severity) %>
+    </div>
+
+    <div class="card-text mt-4">
+      <%= post.content %>
+    </div>
+
+    <div class="mt-5">
+      <p class="mb-0">Sincerely,</p>
+      <p><strong><%= post.sender_name %></strong></p>
+      <p><em><%= post.sender_title %></em></p>
+    </div>
+  </div>
+</div>
