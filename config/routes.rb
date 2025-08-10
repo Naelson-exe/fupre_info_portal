@@ -6,7 +6,8 @@ Rails.application.routes.draw do
 
   # Public routes with custom paths
   resources :posts, only: [ :index, :show ], path: "memos"
-  resources :events, only: [ :index, :show ], path: "calendar"
+  resources :events, only: [ :index, :show ]
+  get "calendar", to: "calendar#index"
   get "about", to: "home#about"
   get "search", to: "search#index"
 

@@ -1,8 +1,11 @@
 @import "variables";
+@import "fonts";
 @import "bootstrap";
 @import "background";
 @import "empty_state";
 @import "interactive_elements";
+@import "navigation";
+@import "calendar";
 
 .header-container {
   display: flex;
@@ -68,9 +71,6 @@ body {
 }
 
 
-// Import Google Fonts
-@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@600;700&family=Roboto:wght@400&display=swap');
-
 // Component Styles
 
 // Buttons
@@ -110,7 +110,7 @@ body {
 
 // Cards
 .card {
-  background: rgba(255, 255, 255, 0.2);
+  background: transparent;
   border-radius: 1rem;
   padding: 1.5rem;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
@@ -145,37 +145,6 @@ body {
 }
 
 // Custom Styles
-.navbar {
-  transition: background-color 0.3s ease;
-  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.05);
-  .nav-item {
-    margin: 0 0.5rem;
-  }
-  .nav-link {
-    font-weight: 500;
-    color: $neutral-dark;
-    transition: color 0.3s ease;
-    padding: 0.5rem 1rem;
-    border-radius: 0.5rem;
-
-    &:hover {
-      color: $primary-brand;
-      background-color: $neutral-light;
-    }
-  }
-
-  .navbar-brand {
-    .fw-bold {
-      color: $primary-brand;
-    }
-  }
-}
-
-.navbar-nav .nav-link.active,
-.navbar-nav .nav-link.show {
-  color: $primary-brand;
-  font-weight: 700;
-}
 
 .btn-primary {
   background-image: linear-gradient(to right, #{$primary-brand}, #{darken($primary-brand, 10%)});
@@ -252,6 +221,7 @@ body {
 
 .list-group-item-action {
   padding: 0.75rem 1rem;
+  background-color: transparent;
   h5 {
     font-size: 1.1rem;
   }
@@ -259,7 +229,7 @@ body {
     font-size: 0.8rem;
   }
   &:hover {
-    background-color: $neutral-light;
+    background-color: rgba(255, 255, 255, 0.1);
   }
 }
 

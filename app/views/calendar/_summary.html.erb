@@ -1,0 +1,16 @@
+<div class="card">
+  <div class="card-header">
+    Upcoming Deadlines and Events
+  </div>
+  <div class="card-body">
+    <h5 class="card-title">Next 7 Days</h5>
+    <ul>
+      <% @events.select { |event| event.start_date.present? && event.start_date.between?(Date.today, Date.today + 7.days) }.each do |event| %>
+        <li><%= event.title %> - <%= event.formatted_date %></li>
+      <% end %>
+      <% @deadlines.select { |deadline| deadline.start_date.present? && deadline.start_date.between?(Date.today, Date.today + 7.days) }.each do |deadline| %>
+        <li><%= deadline.title %> - <%= deadline.formatted_date %></li>
+      <% end %>
+    </ul>
+  </div>
+</div>

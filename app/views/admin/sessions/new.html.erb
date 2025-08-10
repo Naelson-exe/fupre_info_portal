@@ -7,10 +7,14 @@
 </head>
 <body class="bg-light">
   <div class="container d-flex justify-content-center align-items-center min-vh-100">
-    <div class="card" style="width: 400px;">
+    <div class="card login-card">
       <div class="card-body">
         <h3 class="card-title text-center mb-4">Admin Login</h3>
         
+        <div class="text-center mb-3">
+          <%= link_to "← Back to Portal", root_path, class: "text-muted" %>
+        </div>
+
         <%= form_with url: admin_authenticate_path, local: true do |form| %>
           <div class="mb-3">
             <%= form.label :email, class: "form-label" %>

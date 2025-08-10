@@ -36,6 +36,10 @@ class Event < ApplicationRecord
     event_type == "deadline"
   end
 
+  def start_time
+    start_date
+  end
+
   private
 
   def start_date_or_end_date_present

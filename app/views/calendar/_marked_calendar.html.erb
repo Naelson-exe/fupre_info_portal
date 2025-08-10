@@ -1,0 +1,8 @@
+<%= month_calendar events: @events do |date, events| %>
+  <%= date.day %>
+  <% events.each do |event| %>
+    <div class="<%= event.deadline? ? 'deadline' : 'event' %>">
+      <%= event.title %>
+    </div>
+  <% end %>
+<% end %>

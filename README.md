@@ -1,43 +1,97 @@
 # Fupre Info Portal
 
-This is a Rails application for the Fupre Info Portal.
+![Fupre Info Portal Logo](app/assets/images/logo.png)
 
-## System Dependencies
+The Fupre Info Portal is a web application built to serve as a centralized source of information for the students and staff of the Federal University of Petroleum Resources, Effurun (FUPRE). It provides timely updates on news, events, and announcements within the university.
 
-* Ruby 3.1.2
-* PostgreSQL
-* Node.js
-* Yarn
+## Table of Contents
 
-## Configuration
+- [About The Project](#about-the-project)
+- [Key Features](#key-features)
+- [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+- [Usage](#usage)
+- [Running Tests](#running-tests)
+- [Deployment](#deployment)
+- [Contributing](#contributing)
+- [License](#license)
+- [Contact](#contact)
 
-1.  **Database Configuration**: The application uses PostgreSQL in production. The database connection is configured using the `DATABASE_URL` environment variable. In development, it uses SQLite3.
+## About The Project
 
-2.  **Application Configuration**: The `config/application.yml` file is used for application-specific configuration. This file is managed by the `figaro` gem. You should create this file and add your configuration values. See `config/application.yml.example` for a template.
+This portal was developed to bridge the information gap within the FUPRE community. It ensures that students and staff have easy access to official information, reducing the spread of misinformation and keeping everyone informed about happenings in the university.
 
-3.  **Environment Variables**: The following environment variables are required for production:
-    *   `DATABASE_URL`: The URL of your PostgreSQL database.
-    *   `RAILS_MASTER_KEY`: The master key for decrypting credentials.
-    *   `RAILS_SERVE_STATIC_FILES`: Set to `true` to enable serving static files in production.
+## Key Features
 
-## Database Creation and Initialization
+-   **News and Announcements:** View the latest news and announcements from the university management.
+-   **Event Calendar:** Keep track of upcoming academic and social events.
+-   **Search Functionality:** Easily search for specific information within the portal.
+-   **Admin Dashboard:** A dedicated interface for administrators to manage content (posts and events).
+-   **Responsive Design:** Accessible on both desktop and mobile devices.
 
-1.  **Create the database**:
-    ```bash
+## Built With
+
+This project is built with the following technologies:
+
+*   [Ruby on Rails](https://rubyonrails.org/)
+*   [PostgreSQL](https://www.postgresql.org/)
+*   [Hotwire](https://hotwired.dev/) (Turbo and Stimulus)
+*   [SCSS](https://sass-lang.com/)
+*   [RSpec](https://rspec.info/) for testing
+
+## Getting Started
+
+To get a local copy up and running, follow these simple steps.
+
+### Prerequisites
+
+Make sure you have the following installed on your system:
+
+*   Ruby 3.1.2
+*   Bundler
+*   Node.js
+*   Yarn
+*   PostgreSQL
+
+### Installation
+
+1.  **Clone the repository**
+    ```sh
+    git clone https://github.com/Naelson-exe/fupre_info_portal.git
+    cd fupre_info_portal
+    ```
+
+2.  **Install dependencies**
+    ```sh
+    bundle install
+    yarn install
+    ```
+
+3.  **Set up the database**
+    ```sh
     rails db:create
-    ```
-
-2.  **Run migrations**:
-    ```bash
     rails db:migrate
-    ```
-
-3.  **Seed the database**:
-    ```bash
     rails db:seed
     ```
 
-## How to Run the Test Suite
+4.  **Start the development server**
+    ```sh
+    rails server
+    ```
+    The application will be available at `http://localhost:3000`.
+
+## Usage
+
+-   The main application is accessible to the public.
+-   To access the admin dashboard, navigate to `/admin` and log in with your admin credentials.
+-   To create an admin user, run the following command and follow the prompts:
+    ```sh
+    rails admin:create
+    ```
+
+## Running Tests
 
 To run the test suite, use the following command:
 
@@ -45,51 +99,29 @@ To run the test suite, use the following command:
 rspec
 ```
 
-## Services
+## Deployment
 
-*   **Job Queues**: This application does not currently use a job queue.
-*   **Cache Servers**: This application does not currently use a cache server.
-*   **Search Engines**: This application uses basic SQL `LIKE` queries for searching.
+The application is configured for deployment on platforms like Heroku or any other service that supports Rails applications. Ensure you have set up the required environment variables for production, including `DATABASE_URL` and `RAILS_MASTER_KEY`.
 
-## Deployment Instructions
+## Contributing
 
-1.  **Install dependencies**:
-    ```bash
-    bundle install
-    yarn install
-    ```
+Contributions are what make the open-source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
 
-2.  **Precompile assets**:
-    ```bash
-    rails assets:precompile
-    ```
+If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
+Don't forget to give the project a star! Thanks again!
 
-3.  **Run database migrations**:
-    ```bash
-    rails db:migrate
-    ```
+1.  Fork the Project
+2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
+3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
+4.  Push to the Branch (`git push origin feature/AmazingFeature`)
+5.  Open a Pull Request
 
-4.  **Start the application server**:
-    ```bash
-    rails server -e production
-    ```
+## License
 
-## Admin User Creation
+This project is licensed under the MIT License. See the `LICENSE` file for more information.
 
-To create an admin user, run the following command:
+## Contact
 
-```bash
-rails admin:create
-```
+Naelson - [@naelson_exe](https://twitter.com/naelson_exe) - naelson.o.esewein@gmail.com
 
-You will be prompted to enter an email and password for the new admin user.
-
-## Troubleshooting
-
-*   **"Figaro not found" error**: If you see this error, run `bundle install` to install the `figaro` gem.
-*   **"PG::ConnectionBad" error**: This error indicates that the application cannot connect to the PostgreSQL database. Make sure that the `DATABASE_URL` environment variable is set correctly and that the database server is running.
-
-## Backup and Maintenance
-
-*   **Database Backups**: It is recommended to set up regular backups of your PostgreSQL database.
-*   **Maintenance Mode**: This application does not have a built-in maintenance mode. You can use a tool like `capistrano-maintenance` to manage maintenance mode.
+Project Link: [https://github.com/Naelson-exe/fupre_info_portal](https://github.com/Naelson-exe/fupre_info_portal)

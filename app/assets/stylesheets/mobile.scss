@@ -5,8 +5,23 @@
 }
 
 @media (max-width: 991.98px) {
+  .navbar-brand {
+    font-size: 1.2rem;
+  }
+
+  .navbar-toggler-icon {
+    width: 1.2em;
+    height: 1.2em;
+  }
+
   .navbar-nav {
-    padding: 1rem;
+    padding: 0.5rem 1rem;
+    .nav-link {
+      font-size: 0.9rem;
+    }
+    .admin-link .btn {
+      font-size: 0.9rem;
+    }
   }
 }
 
@@ -46,8 +61,8 @@
   }
 
   h1 {
-    font-size: 1.4rem;
-    line-height: 1.9rem;
+    font-size: 1.2rem;
+    line-height: 1.7rem;
   }
 
   h2 {
@@ -61,5 +76,15 @@
 
   .fs-5 {
     font-size: 1rem;
+  }
+}
+
+.login-card {
+  width: 500px;
+}
+
+@media (max-width: 575.98px) {
+  .login-card {
+    width: 100%;
   }
 }

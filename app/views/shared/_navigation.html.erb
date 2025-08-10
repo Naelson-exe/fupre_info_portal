@@ -1,42 +1,25 @@
-<header class="sticky-top">
-  <nav class="navbar navbar-expand-lg navbar-light bg-white border-bottom shadow-sm">
-    <div class="container-fluid">
-      <%= link_to root_path, class: "navbar-brand d-flex align-items-center" do %>
+<header>
+  <nav class="navbar navbar-expand-lg">
+    <div class="nav-container">
+      <%= link_to root_path, class: "navbar-brand d-flex align-items-center", data: { controller: "hidden-admin-login" } do %>
         <%= image_tag "logo.png", alt: "FUPRE Logo", style: "height: 40px; margin-right: 10px;" %>
-        <span class="fw-bold fs-5">FUPRE Info Portal</span>
+        <span class="fw-bold text-uppercase">FUPRE Info Portal</span>
       <% end %>
 
-      <div class="d-flex align-items-center">
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-      </div>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
       <div class="collapse navbar-collapse" id="mainNavbar">
-        <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+        <ul class="navbar-nav main-nav">
           <li class="nav-item">
-            <%= active_link_to "Home", root_path, class: "nav-link" %>
+            <%= link_to "Memos", memos_path, class: "nav-link #{'active' if current_page?(memos_path)}" %>
           </li>
           <li class="nav-item">
-            <%= active_link_to "Memos & Announcements", posts_path, class: "nav-link" %>
+            <%= link_to "Events & Calendar", events_path, class: "nav-link #{'active' if current_page?(events_path) || current_page?(calendar_path)}" %>
           </li>
           <li class="nav-item">
-            <%= active_link_to "Events & Calendar", events_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item">
-            <%= active_link_to "About", about_path, class: "nav-link" %>
-          </li>
-          <li class="nav-item d-lg-none">
-            <%= link_to admin_root_path, class: "nav-link" do %>
-              <i class="fas fa-lock me-1"></i> Admin
-            <% end %>
-          </li>
-        </ul>
-        <ul class="navbar-nav ms-auto d-none d-lg-flex">
-          <li class="nav-item">
-            <%= link_to admin_root_path, class: "btn btn-outline-primary" do %>
-              <i class="fas fa-lock me-1"></i> Admin
-            <% end %>
+            <%= link_to "About", about_path, class: "nav-link #{'active' if current_page?(about_path)}" %>
           </li>
         </ul>
       </div>

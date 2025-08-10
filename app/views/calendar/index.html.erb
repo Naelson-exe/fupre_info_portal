@@ -1,0 +1,42 @@
+<% content_for :title, "Calendar" %>
+
+<div class="container my-5" data-controller="calendar">
+  <div class="d-flex justify-content-between align-items-center mb-4">
+    <h1 class="h2">Calendar</h1>
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-outline-primary active" data-action="click->calendar#toggleView" data-view="list">List View</button>
+      <button type="button" class="btn btn-outline-primary" data-action="click->calendar#toggleView" data-view="calendar">Calendar View</button>
+    </div>
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-outline-secondary active" data-action="click->calendar#switchCalendarView" data-view="month">Month</button>
+      <button type="button" class="btn btn-outline-secondary" data-action="click->calendar#switchCalendarView" data-view="week">Week</button>
+    </div>
+  </div>
+
+  <div class="d-flex justify-content-end align-items-center mb-3">
+    <span>Filter:</span>
+    <div class="dropdown ms-2">
+      <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="filterDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+        <%= params[:filter]&.capitalize || "All" %>
+      </button>
+      <ul class="dropdown-menu" aria-labelledby="filterDropdown">
+        <li><%= link_to "All", calendar_path(filter: nil), class: "dropdown-item" %></li>
+        <li><%= link_to "Events", calendar_path(filter: "events"), class: "dropdown-item" %></li>
+        <li><%= link_to "Deadlines", calendar_path(filter: "deadlines"), class: "dropdown-item" %></li>
+      </ul>
+    </div>
+  </div>
+
+  <div id="summary" class="mb-4">
+    <%= render 'summary' %>
+  </div>
+
+  <div id="calendar-container">
+    <div id="list-view">
+      <%= render 'list_view', events: @events, deadlines: @deadlines %>
+    </div>
+    <div id="calendar-view" class="d-none">
+      <%= render 'marked_calendar' %>
+    </div>
+  </div>
+</div>
