@@ -10,16 +10,41 @@
   </ol>
 </nav>
 
-<%= render partial: @post.post_type, locals: { post: @post } %>
+<%= render partial: @post.post_type.presence || 'memo', locals: { post: @post } %>
 
 <div class="mt-4 d-flex justify-content-between">
-  <%= link_to "← Back to All Memos", posts_path, class: "btn btn-outline-primary" %>
+  <%= link_to posts_path, class: "btn btn-outline-primary" do %>
+    <i class="bi bi-arrow-left"></i>
+    <span class="d-none d-sm-inline">Back to All Memos</span>
+  <% end %>
   <div>
     <button data-action="click->memo-downloader#downloadPdf" class="btn btn-outline-primary">
-      <i class="bi bi-file-earmark-arrow-down"></i> Download as PDF
+      <i class="bi bi-file-earmark-arrow-down"></i>
+      <span class="d-none d-sm-inline">Download as PDF</span>
     </button>
     <button data-action="click->memo-downloader#downloadJpg" class="btn btn-outline-secondary">
-      <i class="bi bi-image"></i> Download as JPG
+      <i class="bi bi-image"></i>
+      <span class="d-none d-sm-inline">Download as JPG</span>
     </button>
   </div>
 </div>
+<style>
+  .card-body p, .card-body div, .card-body strong, .card-body em {
+    font-size: 1rem !important;
+  }
+  .card-title {
+    font-size: 1.5rem !important;
+  }
+  @media (max-width: 576px) {
+    .card-body p, .card-body div, .card-body strong, .card-body em {
+      font-size: 0.9rem !important;
+    }
+    .card-title {
+      font-size: 1.2rem !important;
+    }
+    .btn {
+      font-size: 0.9rem;
+      padding: 0.4rem 0.6rem;
+    }
+  }
+</style>

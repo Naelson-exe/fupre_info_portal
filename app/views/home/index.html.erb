@@ -1,14 +1,10 @@
 <% content_for :title, "Welcome to the FUPRE Information Portal" %>
 
 <%# Welcome Section %>
-<div class="p-5 mb-4 bg-white rounded-3 shadow-sm">
-  <div class="container-fluid py-5">
-    <h1 class="display-5 fw-bold">Welcome to FUPRE Information Portal</h1>
-    <p class="col-md-8 fs-4">Your central hub for official university memos, announcements, and academic events. Stay informed, stay ahead.</p>
-    <hr class="my-4">
-    <p>Explore the latest updates or check the academic calendar.</p>
-    <%= link_to "View All Memos", posts_path, class: "btn btn-primary btn-lg" %>
-    <%= link_to "View Calendar", events_path, class: "btn btn-outline-secondary btn-lg" %>
+<div class="p-4 mb-5 rounded-3">
+  <div class="container-fluid">
+    <h1 class="display-4 fw-bold">Welcome to FUPRE Information Portal</h1>
+    <p class="col-md-8 fs-5">Your central hub for official university memos, announcements, and academic events. Stay informed, stay ahead.</p>
   </div>
 </div>
 
@@ -16,12 +12,12 @@
   <%# Featured Section %>
   <% cache "featured_content" do %>
     <% if @featured_posts.present? || @featured_events.present? %>
-      <div class="col-12 mb-4">
-        <h2 class="mb-3">Featured</h2>
+      <div class="col-12 mb-5">
+        <h2 class="mb-4">Featured</h2>
         <div class="row">
           <% (@featured_posts + @featured_events).each do |item| %>
-            <div class="col-md-6 mb-3">
-              <div class="card shadow-sm h-100">
+            <div class="col-md-6 mb-4">
+              <div class="card h-100">
                 <div class="card-body">
                   <h5 class="card-title"><%= item.title %></h5>
                   <% if item.is_a?(Post) %>
@@ -46,9 +42,9 @@
     <% end %>
   <% end %>
 
-  <div class="col-md-8">
+  <div class="col-md-8 mb-5">
     <%# Latest Memos Section %>
-    <h2 class="mb-3">Latest Memos</h2>
+    <h2 class="mb-4">Latest Memos</h2>
     <div class="list-group">
       <% if @latest_posts.present? %>
         <% @latest_posts.each do |post| %>
@@ -64,30 +60,20 @@
         <p class="text-muted">No recent memos.</p>
       <% end %>
     </div>
-    <div class="mt-3">
-      <%= link_to "View All Memos →", posts_path, class: "btn btn-outline-primary" %>
+    <div class="mt-4">
+      <%= link_to "View All Memos →", posts_path, class: "btn btn-primary" %>
     </div>
   </div>
 
-  <div class="col-md-4">
+  <div class="col-md-4 mb-5">
     <%# Upcoming Events Section %>
-    <h2 class="mb-3">Upcoming Events</h2>
-    <div class="card shadow-sm">
+    <h2 class="mb-4">Upcoming Events</h2>
+    <div class="card upcoming-events">
       <div class="card-body">
         <% if @upcoming_events.present? %>
           <ul class="list-unstyled mb-0">
             <% @upcoming_events.each do |event| %>
-              <li class="mb-3">
-                <h6 class="card-title mb-1"><%= event.title %></h6>
-                <p class="card-text text-muted mb-1">
-                  <% if event.start_date.present? %>
-                    Date: <%= event.start_date.strftime("%B %d, %Y") %>
-                  <% elsif event.end_date.present? %>
-                    Deadline: <%= event.end_date.strftime("%B %d, %Y") %>
-                  <% end %>
-                </p>
-                <%= link_to "View Details", event_path(event), class: "card-link" %>
-              </li>
+              <%= render 'shared/event_item', event: event %>
             <% end %>
           </ul>
         <% else %>
@@ -95,7 +81,7 @@
         <% end %>
       </div>
     </div>
-    <div class="mt-3">
+    <div class="mt-4">
       <%= link_to "View Full Calendar →", events_path, class: "btn btn-outline-secondary" %>
     </div>
   </div>

@@ -80,4 +80,11 @@ module ApplicationHelper
 
     doc.to_html.html_safe
   end
+
+  def event_date_icon(date)
+    content_tag(:div, class: "date-icon") do
+      concat content_tag(:span, date.strftime("%d"), class: "day")
+      concat content_tag(:span, date.strftime("%b"), class: "month")
+    end
+  end
 end

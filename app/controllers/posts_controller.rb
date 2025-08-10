@@ -11,6 +11,13 @@ class PostsController < ApplicationController
     end
 
     @pagy, @posts = pagy(@posts.order(published_at: :desc, created_at: :desc), items: params[:per] || 10)
+
+    respond_to do |format|
+      format.html
+      format.json do
+        render partial: "posts/post_list", formats: [ :html ], locals: { posts: @posts }
+      end
+    end
   end
 
   def show

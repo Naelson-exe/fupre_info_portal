@@ -1,0 +1,20 @@
+<li class="mb-4">
+  <div class="row g-0">
+    <div class="col-auto">
+      <%= event_date_icon(event.start_date || event.end_date) %>
+    </div>
+    <div class="col">
+      <div class="ps-3">
+        <h6 class="card-title mb-1"><%= event.title %></h6>
+        <p class="card-text text-muted mb-1">
+          <% if event.start_date.present? %>
+            Date: <%= format_date(event.start_date) %>
+          <% elsif event.end_date.present? %>
+            Deadline: <%= format_date(event.end_date) %>
+          <% end %>
+        </p>
+        <%= link_to "View Details", event_path(event), class: "card-link" %>
+      </div>
+    </div>
+  </div>
+</li>

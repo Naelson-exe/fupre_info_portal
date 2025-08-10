@@ -1,0 +1,22 @@
+<div class="list-group">
+  <% if posts.any? %>
+    <% posts.each do |post| %>
+      <div class="card mb-3">
+        <%= link_to post_path(post), class: "list-group-item list-group-item-action" do %>
+          <div class="d-flex w-100 justify-content-between">
+            <h5 class="mb-1"><%= post.title %></h5>
+            <small class="text-muted"><%= time_ago_in_words(post.published_at || post.created_at) %> ago</small>
+          </div>
+          <p class="mb-1"><%= truncate(post.summary, length: 150) %></p>
+        <% end %>
+      </div>
+    <% end %>
+  <% else %>
+    <%= render "shared/empty_state", 
+      icon_name: "empty_state",
+      title: "No Posts Found", 
+      message: "It seems there are no posts available at the moment. Check back later or create a new one.",
+      button_text: "Create a New Post",
+      button_path: new_admin_post_path %>
+  <% end %>
+</div>

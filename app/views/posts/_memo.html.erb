@@ -8,9 +8,9 @@
 
     <hr>
 
-    <div class="d-flex justify-content-between mb-3">
-      <div>
-        <strong>From:</strong> <%= post.source.humanize %>
+    <div class="d-flex justify-content-between mb-3 flex-wrap">
+      <div class="me-3">
+        <strong>From:</strong> <%= post.source&.humanize %>
       </div>
       <div>
         <strong>To:</strong> All Staff and Students
@@ -18,12 +18,12 @@
     </div>
 
     <div class="text-end mb-4">
-      <strong>Date:</strong> <%= post.published_at&.to_fs(:long) %>
+      <strong>Date:</strong> <%= post.published_at&.to_date.to_fs(:long) %>
     </div>
 
-    <div class="d-flex justify-content-between">
-      <h1 class="card-title h3 text-center mb-4"><%= post.title %></h1>
-      <%= severity_badge(post.severity) %>
+    <div class="text-center">
+      <h1 class="card-title h3 mb-4" style="text-decoration: underline;"><%= post.title %></h1>
+      <%= severity_badge(post.severity) if post.severity.present? %>
     </div>
 
     <div class="card-text mt-4">

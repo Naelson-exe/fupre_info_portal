@@ -1,15 +1,13 @@
 <% content_for :title, "Academic Calendar & Events" %>
 
-<div class="header-container">
-  <div class="title-container">
-    <h1 class="h2">Academic Calendar & Events</h1>
-  </div>
-  <div class="search-container event-search">
+<div class="mb-4">
+  <h1 class="h1">Academic Calendar & Events</h1>
+  <div class="mt-3">
     <%= render 'shared/search_form', query: params[:query], search_scope: :event, url: events_path %>
   </div>
 </div>
 
-<div class="d-flex justify-content-end mb-3">
+<div class="d-flex justify-content-end align-items-center mb-3">
   <span>Show:</span>
   <div class="dropdown ms-2">
     <button class="btn btn-sm btn-outline-secondary dropdown-toggle" type="button" id="perPageDropdown" data-bs-toggle="dropdown" aria-expanded="false">
@@ -25,33 +23,12 @@
 
 <%# Upcoming Events %>
 <h2 class="h4 mb-3">Upcoming Events</h2>
-<div class="card shadow-sm mb-5">
+<div class="card mb-5">
   <div class="card-body">
-    <ul class="list-group list-group-flush">
+    <ul class="list-unstyled mb-0">
       <% if @upcoming_events.any? %>
         <% @upcoming_events.each do |event| %>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              <h5 class="mb-1">
-                <%= link_to event.title, event_path(event), class: "text-decoration-none" %>
-                <% if event.deadline? %>
-                  <span class="badge bg-warning text-dark">Deadline</span>
-                <% end %>
-              </h5>
-              <p class="mb-1 text-muted">
-                <% if event.start_date.present? && event.end_date.present? %>
-                  Date: <%= event.start_date.to_fs(:long) %> - <%= event.end_date.to_fs(:long) %>
-                <% elsif event.start_date.present? %>
-                  Date: <%= event.start_date.to_fs(:long) %>
-                <% elsif event.end_date.present? %>
-                  Deadline: <%= event.end_date.to_fs(:long) %>
-                <% end %>
-                <% if event.event_time.present? %> at <%= event.event_time.strftime("%I:%M %p") %><% end %>
-              </p>
-              <p class="mb-0"><%= truncate(event.details, length: 100) %></p>
-            </div>
-            <%= link_to "View Details", event_path(event), class: "btn btn-sm btn-outline-primary" %>
-          </li>
+          <%= render 'shared/event_item', event: event %>
         <% end %>
       <% else %>
         <%= render 'shared/empty_state',
@@ -67,29 +44,12 @@
 
 <%# Past Events %>
 <h2 class="h4 mb-3">Past Events</h2>
-<div class="card shadow-sm">
+<div class="card">
   <div class="card-body">
-    <ul class="list-group list-group-flush">
+    <ul class="list-unstyled mb-0">
       <% if @past_events.any? %>
         <% @past_events.each do |event| %>
-          <li class="list-group-item d-flex justify-content-between align-items-center">
-            <div>
-              <h5 class="mb-1">
-                <%= link_to event.title, event_path(event), class: "text-decoration-none" %>
-                <% if event.deadline? %>
-                  <span class="badge bg-warning text-dark">Deadline</span>
-                <% end %>
-              </h5>
-              <p class="mb-1 text-muted">
-                <% if event.start_date.present? %>
-                  Date: <%= event.start_date.to_fs(:long) %>
-                <% elsif event.end_date.present? %>
-                  Deadline: <%= event.end_date.to_fs(:long) %>
-                <% end %>
-              </p>
-            </div>
-            <span class="badge bg-light text-dark">Concluded</span>
-          </li>
+          <%= render 'shared/event_item', event: event %>
         <% end %>
       <% else %>
         <%= render 'shared/empty_state',

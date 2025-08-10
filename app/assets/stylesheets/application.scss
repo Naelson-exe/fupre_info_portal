@@ -1,4 +1,8 @@
+@import "variables";
 @import "bootstrap";
+@import "background";
+@import "empty_state";
+@import "interactive_elements";
 
 .header-container {
   display: flex;
@@ -19,26 +23,6 @@
   margin-left: auto;
 }
 
-// Design System Variables
-
-// Color Palette
-$primary-brand: #0A4A8F;
-$secondary-brand: #A67C52;
-$primary-accent: #FFD700;
-$neutral-light: #F8F9FA;
-$neutral-dark: #212529;
-$white: #FFFFFF;
-$success: #28A745;
-$danger: #DC3545;
-$warning: #FFC107;
-
-// Typography
-$font-family-headings: 'Montserrat', sans-serif;
-$font-family-body: 'Roboto', sans-serif;
-
-@import "background";
-@import "empty_state";
-
 // Base Styles
 body {
   background-color: $neutral-light;
@@ -53,32 +37,33 @@ h1, h2, h3, h4, h5, h6 {
 
 // Typography Scale
 h1 {
-  font-size: 2.25rem;
-  line-height: 2.75rem;
+  font-size: 2.5rem;
+  line-height: 3rem;
   font-weight: 700;
 }
 
 h2 {
-  font-size: 1.75rem;
-  line-height: 2.25rem;
+  font-size: 1.6rem;
+  line-height: 2.1rem;
   font-weight: 700;
+  padding-left: 0.5rem;
 }
 
 h3 {
-  font-size: 1.5rem;
-  line-height: 2rem;
+  font-size: 1.1rem;
+  line-height: 1.6rem;
   font-weight: 600;
 }
 
 body {
-  font-size: 1rem;
-  line-height: 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1.4rem;
   font-weight: 400;
 }
 
 .caption {
-  font-size: 0.75rem;
-  line-height: 1rem;
+  font-size: 0.8rem;
+  line-height: 1.2rem;
   font-weight: 400;
 }
 
@@ -92,8 +77,9 @@ body {
 .btn {
   min-height: 2.75rem;
   min-width: 2.75rem;
-  border-radius: 12px;
+  border-radius: 0.5rem;
   padding: 0.75rem 1.5rem;
+  margin-left: 0.5rem;
 }
 
 .btn-primary {
@@ -124,17 +110,20 @@ body {
 
 // Cards
 .card {
-  background-color: $neutral-light;
-  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 1rem;
   padding: 1.5rem;
-  box-shadow: 9px 9px 16px rgba(163,177,198,0.6), -9px -9px 16px rgba(255,255,255, 0.5);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(5px);
+  -webkit-backdrop-filter: blur(5px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 // Forms
 .form-control {
   background-color: $white;
-  border: 1px solid #dee2e6;
-  border-radius: 12px;
+  border: 0.0625rem solid #dee2e6;
+  border-radius: 0.5rem;
   padding: 0.75rem 1rem;
 
   &:focus {
@@ -144,11 +133,11 @@ body {
 }
 
 .input-group .form-control {
-  border-radius: 0.5rem 0 0 0.5rem;
+  border-radius: 0.5rem !important;
 }
 
 .input-group .btn {
-  border-radius: 0 0.5rem 0.5rem 0;
+  border-radius: 0.5rem;
 }
 
 .form-label {
@@ -158,7 +147,7 @@ body {
 // Custom Styles
 .navbar {
   transition: background-color 0.3s ease;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  box-shadow: 0 0.125rem 0.25rem rgba(0,0,0,0.05);
   .nav-item {
     margin: 0 0.5rem;
   }
@@ -194,15 +183,15 @@ body {
   transition: transform 0.2s ease;
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transform: translateY(-0.125rem);
+    box-shadow: 0 0.25rem 0.5rem rgba(0,0,0,0.1);
   }
 }
 
 .post-card {
   border-radius: 1rem;
-  padding: 2rem;
-  margin-bottom: 2rem;
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
 }
 
 .announcement-card {
@@ -216,9 +205,84 @@ body {
 .main-container {
   width: 90%;
   margin: 0 auto;
-  background-color: $white;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding: 2rem;
-  border-radius: 20px;
+  border-radius: 1rem;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+.date-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 0.5rem;
+  background-color: $primary-brand;
+  color: $white;
+  font-weight: bold;
+  margin-right: 1rem;
+
+  .day {
+    font-size: 1.5rem;
+    line-height: 1;
+  }
+
+  .month {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+  }
+}
+
+.list-unstyled {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.list-group-item-action {
+  padding: 0.75rem 1rem;
+  h5 {
+    font-size: 1.1rem;
+  }
+  p {
+    font-size: 0.8rem;
+  }
+  &:hover {
+    background-color: $neutral-light;
+  }
+}
+
+.upcoming-events {
+  .card-body {
+    max-height: 25rem;
+    overflow-y: auto;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+.w-85 {
+  width: 85% !important;
+}
+
+.navbar-nav .nav-link.active {
+  color: $primary-brand !important;
+  border-bottom: 2px solid $primary-brand;
+}
+
+.footer {
+  background: transparent;
 }
 
 @import "mobile";
