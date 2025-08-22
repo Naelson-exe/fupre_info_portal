@@ -79,12 +79,41 @@
   }
 }
 
-.login-card {
-  width: 500px;
+@media (max-width: 450px) {
+  .card {
+    width: 100% !important;
+  }
 }
 
-@media (max-width: 575.98px) {
-  .login-card {
-    width: 100%;
-  }
+.mobile-actions {
+  position: relative;
+  display: inline-block;
+}
+
+.mobile-actions-dropdown {
+  display: none;
+  position: absolute;
+  right: 0;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 4px;
+  padding: 8px 0;
+}
+
+.mobile-actions-dropdown a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.mobile-actions-dropdown a:hover {
+  background-color: #f1f1f1;
+}
+
+.mobile-actions[open] .mobile-actions-dropdown {
+  display: block;
 }

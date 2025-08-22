@@ -5,3 +5,6 @@ eagerLoadControllersFrom("controllers", application)
 
 import PostsLoaderController from "./posts_loader_controller.js"
 application.register("posts-loader", PostsLoaderController)
+
+import MobileActionsController from "./mobile_actions_controller.js"
+application.register("mobile-actions", MobileActionsController)

@@ -1,5 +1,5 @@
 <% content_for :title, @event.title %>
-<% content_for :meta_description, truncate(@event.details.to_plain_text, length: 160) %>
+<% content_for :meta_description, truncate(@event.details, length: 160) %>
 
 <%# Breadcrumb Navigation %>
 <nav aria-label="breadcrumb">

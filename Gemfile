@@ -71,8 +71,6 @@ end
 gem "bootstrap", "~> 5.3"
 gem "sassc-rails"
 gem "pagy"
-gem "simple_calendar"
 gem "sanitize"
 gem "figaro"
 gem "trix"
-gem "active_link_to"

@@ -32,6 +32,6 @@ export default class extends Controller {
   }
 
   redirectToAdmin() {
-    window.location.href = "/admin/login"
+    window.location.href = "/admin"
   }
 }

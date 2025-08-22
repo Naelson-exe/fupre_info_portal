@@ -122,6 +122,6 @@ This project is licensed under the MIT License. See the `LICENSE` file for more 
 
 ## Contact
 
-Naelson - [@naelson_exe](https://twitter.com/naelson_exe) - naelson.o.esewein@gmail.com
+Naelson - [@naelson_exe](https://twitter.com/naelson_senpai) - fubaranelson84@gmail.com
 
 Project Link: [https://github.com/Naelson-exe/fupre_info_portal](https://github.com/Naelson-exe/fupre_info_portal)

@@ -45,6 +45,8 @@
     }
     #sidebar.collapsed {
       width: 80px;
+      padding-left: 0 !important;
+      padding-right: 0 !important;
     }
     #sidebar.collapsed .nav-link span,
     #sidebar.collapsed .fs-4,
@@ -62,13 +64,25 @@
       text-align: center;
     }
     #sidebar.collapsed .logout-btn {
+      width: auto !important;
       justify-content: center;
+    }
+    #sidebar.collapsed .d-grid {
+      display: grid;
+      place-items: center;
     }
     #sidebar.collapsed .logout-btn .button-text {
       display: none;
     }
     #sidebar.collapsed .logout-btn .bi {
       margin: 0;
+    }
+    #sidebar.collapsed .d-grid .btn {
+      padding: 0.2rem 0.4rem !important;
+      font-size: 0.8rem !important;
+    }
+    #sidebar.collapsed .d-grid .btn .bi {
+      font-size: 1rem !important;
     }
     .sidebar-header {
       display: flex;
@@ -77,15 +91,22 @@
     }
     #sidebar.collapsed .sidebar-header {
       justify-content: center;
+      text-align: center;
+    }
+    #sidebar.collapsed #sidebar-toggle {
+      width: 100%;
+    }
+    #sidebar.collapsed #sidebar-toggle .bi {
+      font-size: 1.5rem;
     }
     .d-grid > form {
       display: contents;
     }
   </style>
 </head>
-<body class="bg-light" data-controller="sidebar">
+<body class="bg-light" data-controller="sidebar mobile-menu">
   <div class="d-flex">
-    <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar" data-sidebar-target="sidebar">
+    <div id="sidebar" class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar" data-sidebar-target="sidebar" data-mobile-menu-target="menu">
       <div class="sidebar-header">
         <a href="<%= admin_root_path %>" class="d-flex align-items-center text-white text-decoration-none">
           <i class="bi bi-shield-lock fs-4"></i>
@@ -123,7 +144,7 @@
         </li>
       </ul>
       <hr>
-      <div class="d-grid gap-2">
+      <div class="d-grid gap-2" data-sidebar-target="buttonContainer">
         <%= link_to root_path, class: "btn btn-info logout-btn d-flex align-items-center", target: "_blank" do %>
           <i class="bi bi-box-arrow-up-right"></i>
           <span class="button-text ms-2">Public Portal</span>

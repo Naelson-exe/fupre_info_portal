@@ -1,25 +1,28 @@
 <header>
-  <nav class="navbar navbar-expand-lg">
+  <nav class="navbar navbar-expand-lg" data-controller="mobile-menu">
     <div class="nav-container">
       <%= link_to root_path, class: "navbar-brand d-flex align-items-center", data: { controller: "hidden-admin-login" } do %>
         <%= image_tag "logo.png", alt: "FUPRE Logo", style: "height: 40px; margin-right: 10px;" %>
         <span class="fw-bold text-uppercase">FUPRE Info Portal</span>
       <% end %>
 
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNavbar" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
+      <button class="navbar-toggler" type="button" data-action="click->mobile-menu#toggle" aria-controls="mainNavbar" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
-      <div class="collapse navbar-collapse" id="mainNavbar">
+      <div class="collapse navbar-collapse" id="mainNavbar" data-mobile-menu-target="menu">
         <ul class="navbar-nav main-nav">
           <li class="nav-item">
-            <%= link_to "Memos", memos_path, class: "nav-link #{'active' if current_page?(memos_path)}" %>
+            <%= active_link_to "Home", root_path, class: "nav-link" %>
           </li>
           <li class="nav-item">
-            <%= link_to "Events & Calendar", events_path, class: "nav-link #{'active' if current_page?(events_path) || current_page?(calendar_path)}" %>
+            <%= active_link_to "Memos & Announcements", posts_path, class: "nav-link", active: :inclusive, class_active: "active" %>
           </li>
           <li class="nav-item">
-            <%= link_to "About", about_path, class: "nav-link #{'active' if current_page?(about_path)}" %>
+            <%= active_link_to "Events & Calendar", events_path, class: "nav-link", active: :inclusive, class_active: "active" %>
+          </li>
+          <li class="nav-item">
+            <%= active_link_to "About", about_path, class: "nav-link" %>
           </li>
         </ul>
       </div>
