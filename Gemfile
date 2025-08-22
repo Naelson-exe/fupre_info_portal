@@ -48,7 +48,7 @@ group :development, :test do
   gem "rubocop-rails-omakase", require: false
 
   gem "byebug", platforms: [ :mri, :mingw, :x64_mingw ]
-  gem "rspec-rails", "~> 6.0"
+  gem "rspec-rails", "~> 8.0"
   gem "factory_bot_rails"
   gem "faker"
 end
