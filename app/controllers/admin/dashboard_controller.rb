@@ -12,7 +12,7 @@ class Admin::DashboardController < Admin::ApplicationController
   end
 
   def analytics
-    @page_views = PageView.order(created_at: :desc).limit(100)
+    @pagy, @page_views = pagy(PageView.order(created_at: :desc))
     @popular_pages = PageView.group(:path).order("count_all DESC").limit(10).count
     @search_queries = PageView.where("path LIKE ?", "%search%").group(:path).order("count_all DESC").limit(10).count
   end

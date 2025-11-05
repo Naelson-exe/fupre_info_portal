@@ -7,15 +7,15 @@
 
   <%# Search and Filter Form %>
   <%= form_with(url: admin_posts_path, method: :get, local: true, class: "mb-4") do |form| %>
-    <div class="row g-3">
+    <div class="row g-3 align-items-stretch">
       <div class="col-md-6">
-        <%= form.text_field :search, value: params[:search], class: "form-control", placeholder: "Search by title or content..." %>
+        <%= form.text_field :search, value: params[:search], class: "form-control h-100", placeholder: "Search by title or content..." %>
       </div>
       <div class="col-md-4">
-        <%= form.select :status, options_for_select([['All Statuses', ''], ['Draft', 'draft'], ['Published', 'published']], params[:status]), {}, class: "form-select" %>
+        <%= form.select :status, options_for_select([['All Statuses', ''], ['Draft', 'draft'], ['Published', 'published']], params[:status]), {}, class: "form-select h-100" %>
       </div>
       <div class="col-md-2">
-        <%= form.submit "Filter", class: "btn btn-secondary w-100" %>
+        <%= form.submit "Filter", class: "btn btn-secondary w-100 h-100" %>
       </div>
     </div>
   <% end %>

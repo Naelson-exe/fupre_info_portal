@@ -92,12 +92,42 @@ body {
 }
 
 .btn-secondary {
+  background-color: lighten($primary-brand, 40%);
+  color: $primary-brand;
+  border: 1px solid $primary-brand;
+
+  &:hover {
+    background-color: lighten($primary-brand, 30%);
+  }
+}
+
+.btn-info {
+  background-color: $primary-brand;
+  color: $white;
+  border: none;
+
+  &:hover {
+    background-color: darken($primary-brand, 10%);
+  }
+}
+
+.btn-warning {
   background-color: $secondary-brand;
   color: $white;
   border: none;
 
   &:hover {
     background-color: darken($secondary-brand, 10%);
+  }
+}
+
+.btn-danger {
+  background-color: $danger;
+  color: $white;
+  border: none;
+
+  &:hover {
+    background-color: darken($danger, 10%);
   }
 }
 
@@ -221,6 +251,8 @@ body {
 .list-group-item-action {
   padding: 0.75rem 1rem;
   background-color: transparent;
+  border-radius: 0.5rem;
+  margin-bottom: 0.5rem;
   h5 {
     font-size: 1.1rem;
   }
@@ -228,7 +260,7 @@ body {
     font-size: 0.8rem;
   }
   &:hover {
-    background-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -255,3 +287,23 @@ body {
 }
 
 @import "mobile";
+
+.btn-success {
+  background-color: darken($primary-brand, 15%);
+  color: $white;
+  border: none;
+
+  &:hover {
+    background-color: darken($primary-brand, 25%);
+  }
+}
+
+.btn-outline-primary {
+  color: $primary-brand;
+  border-color: $primary-brand;
+
+  &:hover {
+    background-color: $primary-brand;
+    color: $white;
+  }
+}

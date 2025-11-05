@@ -1,28 +1,31 @@
 class Admin::PostsController < Admin::ApplicationController
+  include Pagy::Backend
   before_action :set_post, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @posts = Post.all
+    posts_scope = Post.all
 
     # Status filtering
     if params[:status].present? && Post.statuses.key?(params[:status])
-      @posts = @posts.where(status: params[:status])
+      posts_scope = posts_scope.where(status: params[:status])
     end
 
     # Search functionality
     if params[:search].present?
       search_term = "%#{params[:search]}%"
-      @posts = @posts.where("title LIKE ? OR content LIKE ? OR summary LIKE ?",
+      posts_scope = posts_scope.where("title LIKE ? OR content LIKE ? OR summary LIKE ?",
                            search_term, search_term, search_term)
     end
 
     # Sorting
     if params[:sort].present? && Post.column_names.include?(params[:sort])
       direction = params[:direction] == "desc" ? :desc : :asc
-      @posts = @posts.order(params[:sort] => direction)
+      posts_scope = posts_scope.order(params[:sort] => direction)
     else
-      @posts = @posts.order(created_at: :desc)
+      posts_scope = posts_scope.order(created_at: :desc)
     end
+
+    @pagy, @posts = pagy(posts_scope)
   end
 
   def show
@@ -39,6 +42,7 @@ class Admin::PostsController < Admin::ApplicationController
 
   def create
     @post = current_admin_user.posts.build(post_params)
+    @post.published_at ||= Time.current if @post.published_at.blank?
 
     if @post.save
       redirect_to admin_post_path(@post), notice: "Post was successfully created."
@@ -91,6 +95,6 @@ class Admin::PostsController < Admin::ApplicationController
   end
 
   def post_params
-    params.require(:post).permit(:title, :summary, :content, :status, :featured, :post_type, :severity, :source, :sender_name, :sender_title)
+    params.require(:post).permit(:title, :summary, :content, :status, :featured, :post_type, :severity, :source, :sender_name, :sender_title, :published_at)
   end
 end

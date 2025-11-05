@@ -1,31 +1,34 @@
 class Admin::EventsController < Admin::ApplicationController
+  include Pagy::Backend
   before_action :set_event, only: [ :show, :edit, :update, :destroy ]
 
   def index
-    @events = Event.all
+    events_scope = Event.all
 
     # Filter by upcoming/past
     case params[:filter]
     when "upcoming"
-      @events = @events.upcoming
+      events_scope = events_scope.upcoming
     when "past"
-      @events = @events.past
+      events_scope = events_scope.past
     end
 
     # Search functionality
     if params[:search].present?
       search_term = "%#{params[:search]}%"
-      @events = @events.where("title LIKE ? OR details LIKE ?",
+      events_scope = events_scope.where("title LIKE ? OR details LIKE ?",
                            search_term, search_term)
     end
 
     # Sorting
     if params[:sort].present? && Event.column_names.include?(params[:sort])
       direction = params[:direction] == "desc" ? :desc : :asc
-      @events = @events.order(params[:sort] => direction)
+      events_scope = events_scope.order(params[:sort] => direction)
     else
-      @events = @events.order(:start_date, :event_time)
+      events_scope = events_scope.order(:start_date, :event_time)
     end
+
+    @pagy, @events = pagy(events_scope)
   end
 
   def show
