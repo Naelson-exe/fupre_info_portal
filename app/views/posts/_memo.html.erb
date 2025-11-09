@@ -1,39 +1,40 @@
-<div class="card post-card memo-card" data-controller="memo-downloader" data-memo-downloader-target="container">
-  <div class="card-body">
-    <div class="text-center mb-4">
-      <%= image_tag 'logo.png', alt: 'School Logo', class: 'img-fluid', style: 'max-height: 100px;' %>
-      <h2 class="h4 mt-2">Federal University of Petroleum Resources, Effurun</h2>
-      <p class="lead">Office of the Vice Chancellor</p>
-    </div>
-
-    <hr>
-
-    <div class="d-flex justify-content-between mb-3 flex-wrap">
-      <div class="me-3">
-        <strong>From:</strong> <%= post.source&.humanize %>
+<div class="memo-container">
+  <div class="card post-card memo-card" data-controller="memo-downloader" data-memo-downloader-target="container">
+    <div class="card-body">
+      <div class="text-center mb-4">
+        <%= image_tag 'logo.png', alt: 'School Logo', class: 'img-fluid', style: 'max-height: 100px;' %>
+        <h2 class="h4 mt-2">Federal University of Petroleum Resources, Effurun</h2>
+        <p class="lead">Office of the Vice Chancellor</p>
       </div>
-      <div>
-        <strong>To:</strong> All Staff and Students
+
+      <hr>
+
+      <div class="d-flex justify-content-between mb-3 flex-wrap">
+        <div class="me-3">
+          <strong>From:</strong> <%= post.source&.humanize %>
+        </div>
+        <div>
+          <strong>To:</strong> All Staff and Students
+        </div>
       </div>
-    </div>
 
-    <div class="text-end mb-4">
-      <strong>Date:</strong> <%= post.published_at&.to_date.to_fs(:long) %>
-    </div>
+      <div class="text-start mb-4">
+        <strong>Date:</strong> <%= post.published_at&.to_date.to_fs(:long) %>
+      </div>
 
-    <div class="text-center">
-      <h1 class="card-title h3 mb-4" style="text-decoration: underline;"><%= post.title %></h1>
-      <%= severity_badge(post.severity) if post.severity.present? %>
-    </div>
+      <div class="text-center">
+        <h1 class="card-title h3 mb-4" style="text-decoration: underline;"><%= post.title %></h1>
+      </div>
 
-    <div class="card-text mt-4">
-      <%= post.content %>
-    </div>
+      <div class="card-text mt-4">
+        <%= post.content %>
+      </div>
 
-    <div class="mt-5">
-      <p class="mb-0">Sincerely,</p>
-      <p><strong><%= post.sender_name %></strong></p>
-      <p><em><%= post.sender_title %></em></p>
+      <div class="mt-5">
+        <p class="mb-0">Sincerely,</p>
+        <p><strong><%= post.sender_name %></strong></p>
+        <p><em><%= post.sender_title %></em></p>
+      </div>
     </div>
   </div>
 </div>

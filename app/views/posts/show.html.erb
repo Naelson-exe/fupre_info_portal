@@ -2,7 +2,7 @@
 <% content_for :meta_description, @post.summary %>
 
 <%# Breadcrumb Navigation %>
-<nav aria-label="breadcrumb">
+<nav aria-label="breadcrumb" class="d-none d-lg-block">
   <ol class="breadcrumb">
     <li class="breadcrumb-item"><%= link_to "Home", root_path %></li>
     <li class="breadcrumb-item"><%= link_to "Memos", posts_path %></li>

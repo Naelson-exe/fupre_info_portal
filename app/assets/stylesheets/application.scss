@@ -197,7 +197,7 @@ body {
 }
 
 .memo-card {
-  border: 1px solid $primary-brand;
+  border: 1px solid transparent;
 }
 
 .main-container {
@@ -210,6 +210,18 @@ body {
   border-radius: 1rem;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.memo-container {
+  width: 65%;
+  margin: 0 auto;
+  padding-top: 2rem;
+}
+
+@media (max-width: 768px) {
+  .memo-container {
+    width: 100%;
+  }
 }
 
 .btn {
@@ -240,6 +252,7 @@ body {
     text-transform: uppercase;
   }
 }
+
 
 .list-unstyled {
   display: flex;

@@ -4,30 +4,43 @@
   display: none;
 }
 
-@media (max-width: 991.98px) {
-  .navbar-brand {
-    font-size: 1.2rem;
-  }
-
-  .navbar-toggler-icon {
-    width: 1.2em;
-    height: 1.2em;
-  }
-
-  .navbar-nav {
-    padding: 0.5rem 1rem;
-    .nav-link {
-      font-size: 0.9rem;
-    }
-    .admin-link .btn {
-      font-size: 0.9rem;
-    }
-  }
+/* Fluid Typography using clamp() */
+:root {
+  --font-size-sm: clamp(0.8rem, 0.17vw + 0.76rem, 0.92rem);
+  --font-size-base: clamp(1rem, 0.34vw + 0.91rem, 1.25rem);
+  --font-size-md: clamp(1.25rem, 0.61vw + 1.1rem, 1.69rem);
+  --font-size-lg: clamp(1.56rem, 1vw + 1.31rem, 2.25rem);
+  --font-size-xl: clamp(1.95rem, 1.56vw + 1.56rem, 3rem);
+  --font-size-xxl: clamp(2.44rem, 2.38vw + 1.85rem, 4rem);
 }
 
+body {
+  font-size: var(--font-size-base);
+}
+
+h1, .display-4 {
+  font-size: var(--font-size-xl);
+  line-height: 1.2;
+}
+
+h2 {
+  font-size: var(--font-size-lg);
+  line-height: 1.3;
+}
+
+h3 {
+  font-size: var(--font-size-md);
+  line-height: 1.4;
+}
+
+.fs-5 {
+    font-size: var(--font-size-md);
+}
+
+/* Responsive adjustments for smaller screens */
 @media (max-width: 767.98px) {
   .table-responsive {
-    font-size: 0.8rem;
+    font-size: var(--font-size-sm);
   }
 
   .table th,
@@ -39,49 +52,50 @@
     padding: 0.8rem;
   }
 
-  h1 {
-    font-size: 1.6rem;
-    line-height: 2.1rem;
-  }
-
-  h2 {
-    font-size: 1.2rem;
-    line-height: 1.7rem;
+  .btn {
+    padding: 0.6rem 0.8rem;
+    font-size: var(--font-size-sm);
   }
 }
 
 @media (max-width: 575.98px) {
-  .btn {
-    padding: 0.6rem 0.8rem;
-    font-size: 0.9rem;
-  }
+    .navbar-brand {
+        font-size: 1.1rem;
+    }
 
-  .main-container {
-    padding: 0.4rem;
-  }
+    .navbar-nav .nav-link {
+        font-size: 0.85rem;
+    }
 
-  h1 {
-    font-size: 1.2rem;
-    line-height: 1.7rem;
-  }
-
-  h2 {
-    font-size: 1rem;
-    line-height: 1.5rem;
-  }
-
-  .display-4 {
-    font-size: 2rem;
-  }
-
-  .fs-5 {
-    font-size: 1rem;
-  }
+    .navbar-nav .admin-link .btn {
+        font-size: 0.85rem;
+    }
 }
+
 
 @media (max-width: 450px) {
   .card {
     width: 100% !important;
+  }
+
+  .post-date-icon {
+    width: 3.7rem;
+    height: 3.7rem;
+    padding: 0.8rem;
+    margin-left: 1rem;
+
+    .day {
+      font-size: 1.4rem;
+    }
+
+    .month {
+      font-size: 0.7rem;
+    }
+  }
+
+  .list-group-item-action .d-flex {
+    justify-content: space-between;
+    align-items: flex-start;
   }
 }
 

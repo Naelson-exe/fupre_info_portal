@@ -87,4 +87,11 @@ module ApplicationHelper
       concat content_tag(:span, date.strftime("%b"), class: "month")
     end
   end
+
+  def post_date_icon(date)
+    content_tag(:div, class: "date-icon post-date-icon") do
+      concat content_tag(:span, date.strftime("%d"), class: "day")
+      concat content_tag(:span, date.strftime("%b"), class: "month")
+    end
+  end
 end

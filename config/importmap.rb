@@ -7,12 +7,14 @@ pin "@hotwired/turbo-rails", to: "turbo.min.js"
 pin "@hotwired/stimulus", to: "stimulus.min.js"
 pin "@hotwired/stimulus-loading", to: "stimulus-loading.js"
 pin_all_from "app/javascript/controllers", under: "controllers"
-pin "lodash", to: "https://ga.jspm.io/npm:lodash@4.17.21/lodash.js"
-pin "jspdf", to: "jspdf.umd.min.js"
-pin "html2canvas", to: "html2canvas.min.js"
+pin "lodash/debounce", to: "https://ga.jspm.io/npm:lodash@4.17.21/debounce.js"
+pin "jspdf", to: "https://ga.jspm.io/npm:jspdf@2.5.1/dist/jspdf.es.min.js"
+pin "html2canvas", to: "https://ga.jspm.io/npm:html2canvas@1.4.1/dist/html2canvas.js"
 pin "bootstrap", to: "bootstrap.min.js"
 pin "@popperjs/core", to: "popper.js"
-pin "@babel/runtime/helpers/asyncToGenerator", to: "@babel--runtime--helpers--asyncToGenerator.js" # @7.28.3
-pin "@babel/runtime/helpers/defineProperty", to: "@babel--runtime--helpers--defineProperty.js" # @7.28.3
-pin "@babel/runtime/helpers/typeof", to: "@babel--runtime--helpers--typeof.js" # @7.28.3
-pin "canvg" # @3.0.11
+pin "validate.js", to: "https://ga.jspm.io/npm:validate.js@0.13.1/validate.js"
+pin "@babel/runtime/helpers/asyncToGenerator", to: "https://ga.jspm.io/npm:@babel/runtime@7.20.13/helpers/esm/asyncToGenerator.js"
+pin "@babel/runtime/helpers/defineProperty", to: "https://ga.jspm.io/npm:@babel/runtime@7.20.13/helpers/esm/defineProperty.js"
+pin "@babel/runtime/helpers/typeof", to: "https://ga.jspm.io/npm:@babel/runtime@7.20.13/helpers/esm/typeof.js"
+pin "canvg", to: "https://ga.jspm.io/npm:canvg@3.0.11/lib/index.es.js"
+pin "fflate", to: "https://cdn.jsdelivr.net/npm/fflate@0.7.3/esm/index.js"

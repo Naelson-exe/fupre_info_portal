@@ -1,5 +1,5 @@
 import { Controller } from "@hotwired/stimulus"
-import { debounce } from "lodash"
+import debounce from "lodash/debounce"
 
 export default class extends Controller {
   initialize() {
