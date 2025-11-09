@@ -1,7 +1,7 @@
 <%= form_with(url: url, method: :get, data: { controller: "search date-validation" }) do |form| %>
   <div class="input-group mb-3">
     <%= form.hidden_field :search_scope, value: search_scope %>
-    <%= form.search_field :query, value: query, class: "form-control", placeholder: "Search #{search_scope.to_s.pluralize.humanize.downcase}..." %>
+    <%= form.search_field :query, value: query, class: "form-control", placeholder: "Search #{search_scope.to_s.pluralize.humanize.downcase}...", data: { action: "input->search#submit" } %>
     <button class="btn btn-primary" type="submit" data-date-validation-target="submit">Search</button>
   </div>
 

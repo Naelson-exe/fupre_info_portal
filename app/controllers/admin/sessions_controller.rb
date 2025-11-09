@@ -13,7 +13,7 @@ class Admin::SessionsController < Admin::ApplicationController
       admin_user.update(last_login_at: Time.current)
       redirect_to admin_root_path, notice: "Logged in successfully"
     else
-      flash.now[:alert] = "Invalid email or password"
+      flash.now[:error] = "Invalid email or password"
       render :new, layout: false, status: :unprocessable_entity
     end
   end
